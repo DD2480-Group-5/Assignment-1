@@ -1,6 +1,7 @@
 package decide;
 
 import java.awt.*;
+import java.lang.Math;
 
 public class CMVMethods {
     // Implement the methods for section 2.1 in this class
@@ -15,6 +16,18 @@ public class CMVMethods {
      * @return true if condition 0 is satisfied, else false.
      */
     public boolean CMV_0(Point[] points, double LENGTH1) {
+        double point_distance;
+        for (int i = 0; i < points.length - 1; i++) {
+            point_distance = Math.sqrt(
+                Math.pow(points[i].x - points[i+1].x,2) + 
+                Math.pow(points[i].y - points[i+1].y,2)
+            );
+
+            if (point_distance > LENGTH1) {
+                return true;
+            }
+        }
+
         return false;
     }
 
