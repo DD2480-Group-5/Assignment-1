@@ -24,4 +24,5 @@ public class CMVMethodsTest {
         boolean b = CMVMethods.CMV_0(points, len);
         assertFalse(b);
     }
+
 }
