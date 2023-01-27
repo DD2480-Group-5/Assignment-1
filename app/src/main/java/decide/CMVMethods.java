@@ -37,6 +37,23 @@ public class CMVMethods {
     }
 
     /**
+     * Helper method for calculating radius of circumscribed circle of a triangle given by three points.
+     * 
+     * @param p1 : Point 1. 
+     * @param p2 : Point 2.
+     * @param p3 : Point 3
+     * @return Radius of the circumscribed circle of a triangle given by @param p1, @param p2 and @param p3.
+     */
+    public static double circumscribedCircleRadius(Point p1, Point p2, Point p3) {
+        double l1 = p2.distance(p3);
+        double l2 = p1.distance(p3);
+        double l3 = p1.distance(p2);
+        double p = (l1 + l2 + l3) / 2;
+        double radius = l1 * l2 * l3 / (4 * Math.sqrt(p * (p - l1) * (p - l2) * (p - l3)));
+        return radius;
+    }
+
+    /**
      * CMV condition check 0.
      * Condition 0: There exists at least one set of two consecutive data points that are a distance greater than
      * the LENGTH1.
@@ -71,6 +88,16 @@ public class CMVMethods {
      * @return true if condition 1 is satisfied, else false.
      */
     public boolean CMV_1(Point[] points, double RADIUS1) {
+        if (points.length < 3 || RADIUS1 < 0) return false;
+
+        // Loop three points at a time
+        Point p1, p2, p3;
+        for (int i = 1; i < (points.length - 1); i++) {
+            p1 = points[i - 1];
+            p2 = points[i];
+            p3 = points[i + 1];
+            if (circumscribedCircleRadius(p1, p2, p3) > RADIUS1) return true;
+        }
         return false;
     }
 
