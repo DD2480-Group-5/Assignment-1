@@ -375,6 +375,16 @@ public class CMVMethods {
      * @return true if condition 10 is satisfied, else false.
      */
     public boolean CMV_10(Point[] points, int E_PTS, int F_PTS, double AREA1) {
+        if (E_PTS < 1 || F_PTS < 1 || E_PTS + F_PTS > points.length - 3) return false;
+
+        Point p1, p2, p3;
+        for (int i = 0; i < points.length - E_PTS - F_PTS - 2; i++) {
+            p1 = points[i];
+            p2 = points[i + E_PTS + 1];
+            p3 = points[i + E_PTS + F_PTS + 2];
+            if (triangleArea(p1, p2, p3) > AREA1) return true;
+        }
+
         return false;
     }
 
