@@ -1,9 +1,6 @@
 package decide;
 
-import org.checkerframework.checker.units.qual.K;
-
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.lang.Math;
 
 public class CMVMethods {
@@ -235,7 +232,7 @@ public class CMVMethods {
             Point a = points[i];
             Point b = points[i + K_PTS + 1];
 
-            double distance = calculateDistance(a, b);
+            double distance = a.distance(b);
             if (distance > LENGTH1) return true;
         }
         return false;
@@ -267,7 +264,7 @@ public class CMVMethods {
             Point b = points[i + A_PTS + 1];
             Point c = points[i + A_PTS + 1 + B_PTS + 1];
 
-            double r = calculateCentre(a, b, c);
+            double r = circumscribedCircleRadius(a, b, c);
 
             if (r <= RADIUS1) return false;
         }
@@ -381,7 +378,7 @@ public class CMVMethods {
             Point a = points[i];
             Point b = points[i + K_PTS + 1];
 
-            double distance = calculateDistance(a, b);
+            double distance = a.distance(b);
             if (distance < LENGTH2) {
                 flag2 = true;
                 break;
@@ -430,77 +427,5 @@ public class CMVMethods {
      */
     public boolean CMV_14(Point[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
         return false;
-    }
-
-    /**
-     * Calculate the distance between 2 points.
-     *
-     * @param a : point a.
-     * @param b : point b.
-     * @return the distance between a and b.
-     */
-    private static double calculateDistance(Point a, Point b) {
-        double x = Math.abs(a.x - b.x);
-        double y = Math.abs(a.y - b.y);
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    }
-
-    /**
-     * Find the center of a circle based on three points.
-     *
-     * @param a : point a.
-     * @param b : point b.
-     * @param c : point c.
-     * @return the circle radius.
-     */
-    private static double calculateCentre(Point a, Point b, Point c) {
-        double yDelta_a = b.y - a.y;
-        double xDelta_a = b.x - a.x;
-        double yDelta_b = c.y - b.y;
-        double xDelta_b = c.x - b.x;
-        double center_x, center_y;
-
-        double aSlope = yDelta_a / xDelta_a;
-        double bSlope = yDelta_b / xDelta_b;
-
-        Point2D abMid = new Point2D.Double((double) (a.x + b.x) / 2, (double) (a.y + b.y) / 2);
-        Point2D bcMid = new Point2D.Double((double) (b.x + c.x) / 2, (double) (b.y + c.y) / 2);
-
-        if (yDelta_a == 0)         //aSlope == 0
-        {
-            center_x = abMid.getX();
-            if (xDelta_b == 0)         //bSlope == INFINITY
-            {
-                center_y = bcMid.getY();
-            } else {
-                center_y = bcMid.getY() + (bcMid.getX() - center_x) / bSlope;
-            }
-        } else if (yDelta_b == 0)               //bSlope == 0
-        {
-            center_x = bcMid.getX();
-            if (xDelta_a == 0)             //aSlope == INFINITY
-            {
-                center_y = abMid.getY();
-            } else {
-                center_y = abMid.getY() + (abMid.getX() - center_x) / aSlope;
-            }
-        } else if (xDelta_a == 0)        //aSlope == INFINITY
-        {
-            center_y = abMid.getY();
-            center_x = bSlope * (bcMid.getY() - center_y) + bcMid.getX();
-        } else if (xDelta_b == 0)        //bSlope == INFINITY
-        {
-            center_y = bcMid.getY();
-            center_x = aSlope * (abMid.getY() - center_y) + abMid.getX();
-        } else {
-            center_x = (aSlope * bSlope * (abMid.getY() - bcMid.getY()) - aSlope * bcMid.getX()
-                    + bSlope * abMid.getX()) / (bSlope - aSlope);
-            center_y = abMid.getY() - (center_x - abMid.getX()) / aSlope;
-        }
-
-        double x = Math.abs(center_x - b.x);
-        double y = Math.abs(center_y - b.y);
-
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 }
