@@ -1,5 +1,7 @@
 package decide;
 
+import org.checkerframework.checker.units.qual.K;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.lang.Math;
@@ -188,6 +190,10 @@ public class CMVMethods {
     public boolean CMV_7(Point[] points, int K_PTS, double LENGTH1) {
         int length = points.length;
 
+        if (K_PTS < 1 || K_PTS + 2 > length) return false;
+
+        if (LENGTH1 < 0) return false;
+
         if (length < 3) return false;
 
         for (int i = 0; i < length - K_PTS - 1; i++) {
@@ -214,6 +220,8 @@ public class CMVMethods {
      */
     public boolean CMV_8(Point[] points, int A_PTS, int B_PTS, double RADIUS1) {
         int length = points.length;
+
+        if (A_PTS < 1 || B_PTS < 1 || A_PTS + B_PTS + 3 > length) return false;
 
         if (length < 5) return false;
 
@@ -271,7 +279,7 @@ public class CMVMethods {
     /**
      * CMV condition check 11.
      * There exists at least one set of two data points, (X[i],Y[i]) and (X[j],Y[j]), separated by
-     * exactly G PTS consecutive intervening points, such that X[j] - X[i] < 0. (where i < j ) The
+     * exactly G_PTS consecutive intervening points, such that X[j] - X[i] < 0. (where i < j ) The
      * condition is not met when NUMPOINTS < 3.
      *
      * @param points : Array containing the coordinates of data points.
@@ -279,6 +287,19 @@ public class CMVMethods {
      * @return true if condition 11 is satisfied, else false.
      */
     public boolean CMV_11(Point[] points, int G_PTS) {
+        int length = points.length;
+
+        if (length < 3) return false;
+
+        if (G_PTS < 1 || G_PTS + 2 > length) return false;
+
+        for (int i = 0; i < length - G_PTS - 1; i++) {
+            Point a = points[i];
+            Point b = points[i + G_PTS + 1];
+
+            if (b.x - a.x < 0) return true;
+        }
+
         return false;
     }
 
