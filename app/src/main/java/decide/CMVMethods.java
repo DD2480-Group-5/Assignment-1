@@ -263,6 +263,19 @@ public class CMVMethods {
      * @return true if condition 9 is satisfied, else false.
      */
     public boolean CMV_9(Point[] points, int C_PTS, int D_PTS, double EPSILON) {
+        if (C_PTS < 1 || D_PTS < 1 || C_PTS + D_PTS > points.length - 3) return false;
+
+        Point p1, p2, p3;
+        for (int i = 0; i < points.length - C_PTS - D_PTS - 2; i++) {
+            p1 = points[i];
+            p2 = points[i + C_PTS + 1];
+            p3 = points[i + C_PTS + D_PTS + 2];
+            if (!(p2.equals(p1) && !(p2.equals(p3)))) {
+                double angle = Math.abs(angleBetweenThreePoints(p2, p1, p3));
+                if (angle > (Math.PI + EPSILON) || angle < (Math.PI - EPSILON))
+                    return true;
+            }
+        }
         return false;
     }
 
