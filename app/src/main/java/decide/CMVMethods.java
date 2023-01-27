@@ -1,6 +1,9 @@
 package decide;
 
+import org.checkerframework.checker.units.qual.K;
+
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.lang.Math;
 
 public class CMVMethods {
@@ -8,10 +11,10 @@ public class CMVMethods {
 
     /**
      * Helper method for calculating the angle between the two lines formed by three points.
-     * 
-     * @param p1  :  Point 1, this is the point the lines start from.
-     * @param p2  :  Point 2, end point for line 1.
-     * @param p3  :  Point 3, end point for line 2.
+     *
+     * @param p1 :  Point 1, this is the point the lines start from.
+     * @param p2 :  Point 2, end point for line 1.
+     * @param p3 :  Point 3, end point for line 2.
      * @return Angle in degrees.
      */
     public static double angleBetweenThreePoints(Point p1, Point p2, Point p3) {
@@ -23,15 +26,12 @@ public class CMVMethods {
         double slopeBx = p3.x - x;
         double slopeBy = p3.y - y;
 
-        double d = (slopeAx * slopeBx + slopeAy * slopeBy) / Math.sqrt(
-                (slopeAx * slopeAx + slopeAy * slopeAy) * (slopeBx * slopeBx + slopeBy * slopeBy));
+        double d = (slopeAx * slopeBx + slopeAy * slopeBy) / Math.sqrt((slopeAx * slopeAx + slopeAy * slopeAy) * (slopeBx * slopeBx + slopeBy * slopeBy));
 
-        if (d > 1.0) 
-            return 0.0;
-        
-        else if (d < -1.0) 
-            return Math.PI;
-        
+        if (d > 1.0) return 0.0;
+
+        else if (d < -1.0) return Math.PI;
+
 
         return Math.toRadians(Math.acos(d));
     }
@@ -65,10 +65,7 @@ public class CMVMethods {
     public boolean CMV_0(Point[] points, double LENGTH1) {
         double point_distance;
         for (int i = 0; i < points.length - 1; i++) {
-            point_distance = Math.sqrt(
-                Math.pow(points[i].x - points[i+1].x,2) + 
-                Math.pow(points[i].y - points[i+1].y,2)
-            );
+            point_distance = Math.sqrt(Math.pow(points[i].x - points[i + 1].x, 2) + Math.pow(points[i].y - points[i + 1].y, 2));
 
             if (point_distance > LENGTH1) {
                 return true;
@@ -117,7 +114,7 @@ public class CMVMethods {
      */
     public boolean CMV_2(Point[] points, double EPSILON) {
         if ((points.length < 3) || (Math.abs(EPSILON) > Math.PI)) return false;
-     
+
         // Loop three points at a time
         Point p1, p2, p3;
         for (int i = 1; i < (points.length - 1); i++) {
@@ -126,8 +123,7 @@ public class CMVMethods {
             p3 = points[i + 1];
             if (!(p2.equals(p1) && !(p2.equals(p3)))) {
                 double angle = Math.abs(angleBetweenThreePoints(p2, p1, p3));
-                if (angle > (Math.PI + EPSILON) || angle < (Math.PI - EPSILON))
-                    return true;
+                if (angle > (Math.PI + EPSILON) || angle < (Math.PI - EPSILON)) return true;
             }
         }
         return false;
@@ -143,7 +139,7 @@ public class CMVMethods {
      * @return true if condition 3 is satisfied, else false.
      */
     public boolean CMV_3(Point[] points, double AREA1) {
-        if(points.length < 3) return false;
+        if (points.length < 3) return false;
 
         Point p1, p2, p3;
         for (int i = 0; i < (points.length) - 2; ++i) {
@@ -151,11 +147,11 @@ public class CMVMethods {
             p2 = points[i + 1];
             p3 = points[i + 2];
 
-            if(p1.equals(p2) || p2.equals(p3) || p1.equals(p3)) continue;
+            if (p1.equals(p2) || p2.equals(p3) || p1.equals(p3)) continue;
 
-            double area = Math.abs((p1.x*(p2.y - p3.y) + p2.x*(p3.y - p1.y) + p3.x*(p1.y - p2.y)) / 2);
+            double area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
 
-            if(area > AREA1) return true;
+            if (area > AREA1) return true;
         }
         return false;
     }
@@ -216,9 +212,10 @@ public class CMVMethods {
 
     /**
      * CMV condition check 7.
-     * There exists at least one set of two data points separated by exactly K PTS consecutive intervening
-     * points that are a distance greater than the length, LENGTH1, apart. The condition is not met when
-     * NUMPOINTS < 3.
+     * There exists at least one set of two data points separated by exactly K_PTS consecutive intervening
+     * points that are a distance greater than the length, LENGTH1, apart.
+     * <p>
+     * The condition is not met when NUMPOINTS < 3.
      *
      * @param points  :  Array containing the coordinates of data points.
      * @param K_PTS   :   1 ≤ K_PTS ≤ (NUMPOINTS−2)
@@ -226,6 +223,21 @@ public class CMVMethods {
      * @return true if condition 7 is satisfied, else false.
      */
     public boolean CMV_7(Point[] points, int K_PTS, double LENGTH1) {
+        int length = points.length;
+
+        if (K_PTS < 1 || K_PTS + 2 > length) return false;
+
+        if (LENGTH1 < 0) return false;
+
+        if (length < 3) return false;
+
+        for (int i = 0; i < length - K_PTS - 1; i++) {
+            Point a = points[i];
+            Point b = points[i + K_PTS + 1];
+
+            double distance = calculateDistance(a, b);
+            if (distance > LENGTH1) return true;
+        }
         return false;
     }
 
@@ -242,7 +254,24 @@ public class CMVMethods {
      * @return true if condition 8 is satisfied, else false.
      */
     public boolean CMV_8(Point[] points, int A_PTS, int B_PTS, double RADIUS1) {
-        return false;
+        int length = points.length;
+
+        if (A_PTS < 1 || B_PTS < 1 || A_PTS + B_PTS + 3 > length) return false;
+
+        if (length < 5) return false;
+
+        if (RADIUS1 < 0) return false;
+
+        for (int i = 0; i < length - A_PTS - B_PTS - 2; i++) {
+            Point a = points[i];
+            Point b = points[i + A_PTS + 1];
+            Point c = points[i + A_PTS + 1 + B_PTS + 1];
+
+            double r = calculateCentre(a, b, c);
+
+            if (r <= RADIUS1) return false;
+        }
+        return true;
     }
 
     /**
@@ -298,7 +327,7 @@ public class CMVMethods {
     /**
      * CMV condition check 11.
      * There exists at least one set of two data points, (X[i],Y[i]) and (X[j],Y[j]), separated by
-     * exactly G PTS consecutive intervening points, such that X[j] - X[i] < 0. (where i < j ) The
+     * exactly G_PTS consecutive intervening points, such that X[j] - X[i] < 0. (where i < j ) The
      * condition is not met when NUMPOINTS < 3.
      *
      * @param points : Array containing the coordinates of data points.
@@ -306,6 +335,19 @@ public class CMVMethods {
      * @return true if condition 11 is satisfied, else false.
      */
     public boolean CMV_11(Point[] points, int G_PTS) {
+        int length = points.length;
+
+        if (length < 3) return false;
+
+        if (G_PTS < 1 || G_PTS + 2 > length) return false;
+
+        for (int i = 0; i < length - G_PTS - 1; i++) {
+            Point a = points[i];
+            Point b = points[i + G_PTS + 1];
+
+            if (b.x - a.x < 0) return true;
+        }
+
         return false;
     }
 
@@ -320,11 +362,33 @@ public class CMVMethods {
      *
      * @param points  : Array containing the coordinates of data points.
      * @param K_PTS   :
+     * @param LENGTH1 : 0 ≤ LENGTH1.
      * @param LENGTH2 : 0 ≤ LENGTH2.
      * @return true if condition 12 is satisfied, else false.
      */
-    public boolean CMV_12(Point[] points, int K_PTS, double LENGTH2) {
-        return false;
+    public boolean CMV_12(Point[] points, int K_PTS, double LENGTH1, double LENGTH2) {
+        int length = points.length;
+
+        if (length < 3) return false;
+
+        if (LENGTH1 < 0 || LENGTH2 < 0) return false;
+
+        boolean flag1 = CMV_7(points, K_PTS, LENGTH1);
+
+        boolean flag2 = false;
+
+        for (int i = 0; i < length - K_PTS - 1; i++) {
+            Point a = points[i];
+            Point b = points[i + K_PTS + 1];
+
+            double distance = calculateDistance(a, b);
+            if (distance < LENGTH2) {
+                flag2 = true;
+                break;
+            }
+        }
+
+        return flag1 && flag2;
     }
 
     /**
@@ -366,5 +430,77 @@ public class CMVMethods {
      */
     public boolean CMV_14(Point[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
         return false;
+    }
+
+    /**
+     * Calculate the distance between 2 points.
+     *
+     * @param a : point a.
+     * @param b : point b.
+     * @return the distance between a and b.
+     */
+    private static double calculateDistance(Point a, Point b) {
+        double x = Math.abs(a.x - b.x);
+        double y = Math.abs(a.y - b.y);
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    }
+
+    /**
+     * Find the center of a circle based on three points.
+     *
+     * @param a : point a.
+     * @param b : point b.
+     * @param c : point c.
+     * @return the circle radius.
+     */
+    private static double calculateCentre(Point a, Point b, Point c) {
+        double yDelta_a = b.y - a.y;
+        double xDelta_a = b.x - a.x;
+        double yDelta_b = c.y - b.y;
+        double xDelta_b = c.x - b.x;
+        double center_x, center_y;
+
+        double aSlope = yDelta_a / xDelta_a;
+        double bSlope = yDelta_b / xDelta_b;
+
+        Point2D abMid = new Point2D.Double((double) (a.x + b.x) / 2, (double) (a.y + b.y) / 2);
+        Point2D bcMid = new Point2D.Double((double) (b.x + c.x) / 2, (double) (b.y + c.y) / 2);
+
+        if (yDelta_a == 0)         //aSlope == 0
+        {
+            center_x = abMid.getX();
+            if (xDelta_b == 0)         //bSlope == INFINITY
+            {
+                center_y = bcMid.getY();
+            } else {
+                center_y = bcMid.getY() + (bcMid.getX() - center_x) / bSlope;
+            }
+        } else if (yDelta_b == 0)               //bSlope == 0
+        {
+            center_x = bcMid.getX();
+            if (xDelta_a == 0)             //aSlope == INFINITY
+            {
+                center_y = abMid.getY();
+            } else {
+                center_y = abMid.getY() + (abMid.getX() - center_x) / aSlope;
+            }
+        } else if (xDelta_a == 0)        //aSlope == INFINITY
+        {
+            center_y = abMid.getY();
+            center_x = bSlope * (bcMid.getY() - center_y) + bcMid.getX();
+        } else if (xDelta_b == 0)        //bSlope == INFINITY
+        {
+            center_y = bcMid.getY();
+            center_x = aSlope * (abMid.getY() - center_y) + abMid.getX();
+        } else {
+            center_x = (aSlope * bSlope * (abMid.getY() - bcMid.getY()) - aSlope * bcMid.getX()
+                    + bSlope * abMid.getX()) / (bSlope - aSlope);
+            center_y = abMid.getY() - (center_x - abMid.getX()) / aSlope;
+        }
+
+        double x = Math.abs(center_x - b.x);
+        double y = Math.abs(center_y - b.y);
+
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 }
