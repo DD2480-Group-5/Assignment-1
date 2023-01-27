@@ -72,6 +72,20 @@ public class CMVMethods {
      * @return true if condition 3 is satisfied, else false.
      */
     public boolean CMV_3(Point[] points, double AREA1) {
+        if(points.length < 3) return false;
+
+        Point p1, p2, p3;
+        for (int i = 0; i < (points.length) - 2; ++i) {
+            p1 = points[i];
+            p2 = points[i + 1];
+            p3 = points[i + 2];
+
+            if(p1.equals(p2) || p2.equals(p3) || p1.equals(p3)) continue;
+
+            double area = Math.abs((p1.x*(p2.y - p3.y) + p2.x*(p3.y - p1.y) + p3.x*(p1.y - p2.y)) / 2);
+
+            if(area > AREA1) return true;
+        }
         return false;
     }
 
