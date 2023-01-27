@@ -8,10 +8,10 @@ public class CMVMethods {
 
     /**
      * Helper method for calculating the angle between the two lines formed by three points.
-     * 
-     * @param p1  :  Point 1, this is the point the lines start from.
-     * @param p2  :  Point 2, end point for line 1.
-     * @param p3  :  Point 3, end point for line 2.
+     *
+     * @param p1 :  Point 1, this is the point the lines start from.
+     * @param p2 :  Point 2, end point for line 1.
+     * @param p3 :  Point 3, end point for line 2.
      * @return Angle in degrees.
      */
     public static double angleBetweenThreePoints(Point p1, Point p2, Point p3) {
@@ -26,12 +26,12 @@ public class CMVMethods {
         double d = (slopeAx * slopeBx + slopeAy * slopeBy) / Math.sqrt(
                 (slopeAx * slopeAx + slopeAy * slopeAy) * (slopeBx * slopeBx + slopeBy * slopeBy));
 
-        if (d > 1.0) 
+        if (d > 1.0)
             return 0.0;
-        
-        else if (d < -1.0) 
+
+        else if (d < -1.0)
             return Math.PI;
-        
+
 
         return Math.toRadians(Math.acos(d));
     }
@@ -49,8 +49,8 @@ public class CMVMethods {
         double point_distance;
         for (int i = 0; i < points.length - 1; i++) {
             point_distance = Math.sqrt(
-                Math.pow(points[i].x - points[i+1].x,2) + 
-                Math.pow(points[i].y - points[i+1].y,2)
+                    Math.pow(points[i].x - points[i + 1].x, 2) +
+                            Math.pow(points[i].y - points[i + 1].y, 2)
             );
 
             if (point_distance > LENGTH1) {
@@ -90,7 +90,7 @@ public class CMVMethods {
      */
     public boolean CMV_2(Point[] points, double EPSILON) {
         if ((points.length < 3) || (Math.abs(EPSILON) > Math.PI)) return false;
-     
+
         // Loop three points at a time
         Point p1, p2, p3;
         for (int i = 1; i < (points.length - 1); i++) {
@@ -116,7 +116,7 @@ public class CMVMethods {
      * @return true if condition 3 is satisfied, else false.
      */
     public boolean CMV_3(Point[] points, double AREA1) {
-        if(points.length < 3) return false;
+        if (points.length < 3) return false;
 
         Point p1, p2, p3;
         for (int i = 0; i < (points.length) - 2; ++i) {
@@ -124,11 +124,11 @@ public class CMVMethods {
             p2 = points[i + 1];
             p3 = points[i + 2];
 
-            if(p1.equals(p2) || p2.equals(p3) || p1.equals(p3)) continue;
+            if (p1.equals(p2) || p2.equals(p3) || p1.equals(p3)) continue;
 
-            double area = Math.abs((p1.x*(p2.y - p3.y) + p2.x*(p3.y - p1.y) + p3.x*(p1.y - p2.y)) / 2);
+            double area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
 
-            if(area > AREA1) return true;
+            if (area > AREA1) return true;
         }
         return false;
     }
@@ -181,9 +181,10 @@ public class CMVMethods {
 
     /**
      * CMV condition check 7.
-     * There exists at least one set of two data points separated by exactly K PTS consecutive intervening
-     * points that are a distance greater than the length, LENGTH1, apart. The condition is not met when
-     * NUMPOINTS < 3.
+     * There exists at least one set of two data points separated by exactly K_PTS consecutive intervening
+     * points that are a distance greater than the length, LENGTH1, apart.
+     * <p>
+     * The condition is not met when NUMPOINTS < 3.
      *
      * @param points  :  Array containing the coordinates of data points.
      * @param K_PTS   :   1 ≤ K_PTS ≤ (NUMPOINTS−2)
@@ -191,6 +192,17 @@ public class CMVMethods {
      * @return true if condition 7 is satisfied, else false.
      */
     public boolean CMV_7(Point[] points, int K_PTS, double LENGTH1) {
+        int length = points.length;
+
+        if (length < 3) return false;
+
+        for (int i = 0; i < length - K_PTS - 1; i++) {
+            Point a = points[i];
+            Point b = points[i + K_PTS + 1];
+
+            double distance = calculateDistance(a, b);
+            if (distance > LENGTH1) return true;
+        }
         return false;
     }
 
@@ -318,5 +330,18 @@ public class CMVMethods {
      */
     public boolean CMV_14(Point[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
         return false;
+    }
+
+    /**
+     * Calculate the distance between 2 points.
+     *
+     * @param a : point a.
+     * @param b : point b.
+     * @return the distance between a and b.
+     */
+    private double calculateDistance(Point a, Point b) {
+        double x = Math.abs(a.x - b.x);
+        double y = Math.abs(a.y - b.y);
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 }
