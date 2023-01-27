@@ -186,6 +186,14 @@ public class CMVMethods {
      * @return true if condition 5 is satisfied, else false.
      */
     public boolean CMV_5(Point[] points) {
+        if (points.length < 2) return false;
+
+        Point p1, p2;
+        for (int i = 0; i < points.length - 1; i++) {
+            p1 = points[i];
+            p2 = points[i + 1];
+            if (p2.getX() - p1.getX() < 0) return true;
+        }
         return false;
     }
 
