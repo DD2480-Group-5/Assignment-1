@@ -7,6 +7,36 @@ public class CMVMethods {
     // Implement the methods for section 2.1 in this class
 
     /**
+     * Helper method for calculating the angle between the two lines formed by three points.
+     * 
+     * @param p1  :  Point 1, this is the point the lines start from.
+     * @param p2  :  Point 2, end point for line 1.
+     * @param p3  :  Point 3, end point for line 2.
+     * @return Angle in degrees.
+     */
+    public static double angleBetweenThreePoints(Point p1, Point p2, Point p3) {
+        double x = p1.x;
+        double y = p1.y;
+
+        double slopeAx = p2.x - x;
+        double slopeAy = p2.y - y;
+        double slopeBx = p3.x - x;
+        double slopeBy = p3.y - y;
+
+        double d = (slopeAx * slopeBx + slopeAy * slopeBy) / Math.sqrt(
+                (slopeAx * slopeAx + slopeAy * slopeAy) * (slopeBx * slopeBx + slopeBy * slopeBy));
+
+        if (d > 1.0) 
+            return 0.0;
+        
+        else if (d < -1.0) 
+            return Math.PI;
+        
+
+        return Math.toRadians(Math.acos(d));
+    }
+
+    /**
      * CMV condition check 0.
      * Condition 0: There exists at least one set of two consecutive data points that are a distance greater than
      * the LENGTH1.
@@ -59,6 +89,20 @@ public class CMVMethods {
      * @return true if condition 2 is satisfied, else false.
      */
     public boolean CMV_2(Point[] points, double EPSILON) {
+        if ((points.length < 3) || (Math.abs(EPSILON) > Math.PI)) return false;
+     
+        // Loop three points at a time
+        Point p1, p2, p3;
+        for (int i = 1; i < (points.length - 1); i++) {
+            p1 = points[i - 1];
+            p2 = points[i];
+            p3 = points[i + 1];
+            if (!(p2.equals(p1) && !(p2.equals(p3)))) {
+                double angle = Math.abs(angleBetweenThreePoints(p2, p1, p3));
+                if (angle > (Math.PI + EPSILON) || angle < (Math.PI - EPSILON))
+                    return true;
+            }
+        }
         return false;
     }
 
