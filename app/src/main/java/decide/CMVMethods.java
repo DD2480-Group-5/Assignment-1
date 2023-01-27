@@ -266,9 +266,9 @@ public class CMVMethods {
 
             double r = circumscribedCircleRadius(a, b, c);
 
-            if (r <= RADIUS1) return false;
+            if (r > RADIUS1) return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -406,6 +406,19 @@ public class CMVMethods {
      * @return true if condition 13 is satisfied, else false.
      */
     public boolean CMV_13(Point[] points, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
+        if (A_PTS < 1 || B_PTS < 1 || A_PTS + B_PTS > points.length - 3 || RADIUS1 < 0 || RADIUS2 < 0) return false;
+
+        boolean flag = CMV_8(points, A_PTS, B_PTS, RADIUS1);
+        if (!flag) return false;
+
+        Point p1, p2, p3;
+        for (int i = 0; i < points.length - A_PTS - B_PTS - 2; i++) {
+            p1 = points[i];
+            p2 = points[i + A_PTS + 1];
+            p3 = points[i + A_PTS + B_PTS + 2];
+            if (circumscribedCircleRadius(p1, p2, p3) <= RADIUS2) return true;
+        }
+
         return false;
     }
 
