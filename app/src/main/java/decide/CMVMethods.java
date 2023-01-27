@@ -1,6 +1,7 @@
 package decide;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.lang.Math;
 
 public class CMVMethods {
@@ -23,14 +24,11 @@ public class CMVMethods {
         double slopeBx = p3.x - x;
         double slopeBy = p3.y - y;
 
-        double d = (slopeAx * slopeBx + slopeAy * slopeBy) / Math.sqrt(
-                (slopeAx * slopeAx + slopeAy * slopeAy) * (slopeBx * slopeBx + slopeBy * slopeBy));
+        double d = (slopeAx * slopeBx + slopeAy * slopeBy) / Math.sqrt((slopeAx * slopeAx + slopeAy * slopeAy) * (slopeBx * slopeBx + slopeBy * slopeBy));
 
-        if (d > 1.0)
-            return 0.0;
+        if (d > 1.0) return 0.0;
 
-        else if (d < -1.0)
-            return Math.PI;
+        else if (d < -1.0) return Math.PI;
 
 
         return Math.toRadians(Math.acos(d));
@@ -48,10 +46,7 @@ public class CMVMethods {
     public boolean CMV_0(Point[] points, double LENGTH1) {
         double point_distance;
         for (int i = 0; i < points.length - 1; i++) {
-            point_distance = Math.sqrt(
-                    Math.pow(points[i].x - points[i + 1].x, 2) +
-                            Math.pow(points[i].y - points[i + 1].y, 2)
-            );
+            point_distance = Math.sqrt(Math.pow(points[i].x - points[i + 1].x, 2) + Math.pow(points[i].y - points[i + 1].y, 2));
 
             if (point_distance > LENGTH1) {
                 return true;
@@ -99,8 +94,7 @@ public class CMVMethods {
             p3 = points[i + 1];
             if (!(p2.equals(p1) && !(p2.equals(p3)))) {
                 double angle = Math.abs(angleBetweenThreePoints(p2, p1, p3));
-                if (angle > (Math.PI + EPSILON) || angle < (Math.PI - EPSILON))
-                    return true;
+                if (angle > (Math.PI + EPSILON) || angle < (Math.PI - EPSILON)) return true;
             }
         }
         return false;
@@ -219,7 +213,22 @@ public class CMVMethods {
      * @return true if condition 8 is satisfied, else false.
      */
     public boolean CMV_8(Point[] points, int A_PTS, int B_PTS, double RADIUS1) {
-        return false;
+        int length = points.length;
+
+        if (length < 5) return false;
+
+        if (RADIUS1 < 0) return false;
+
+        for (int i = 0; i < length - A_PTS - B_PTS - 2; i++) {
+            Point a = points[i];
+            Point b = points[i + A_PTS + 1];
+            Point c = points[i + A_PTS + 1 + B_PTS + 1];
+
+            double r = calculateCentre(a, b, c);
+
+            if (r <= RADIUS1) return false;
+        }
+        return true;
     }
 
     /**
@@ -339,9 +348,68 @@ public class CMVMethods {
      * @param b : point b.
      * @return the distance between a and b.
      */
-    private double calculateDistance(Point a, Point b) {
+    private static double calculateDistance(Point a, Point b) {
         double x = Math.abs(a.x - b.x);
         double y = Math.abs(a.y - b.y);
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    }
+
+    /**
+     * Find the center of a circle based on three points.
+     *
+     * @param a : point a.
+     * @param b : point b.
+     * @param c : point c.
+     * @return the circle radius.
+     */
+    private static double calculateCentre(Point a, Point b, Point c) {
+        double yDelta_a = b.y - a.y;
+        double xDelta_a = b.x - a.x;
+        double yDelta_b = c.y - b.y;
+        double xDelta_b = c.x - b.x;
+        double center_x, center_y;
+
+        double aSlope = yDelta_a / xDelta_a;
+        double bSlope = yDelta_b / xDelta_b;
+
+        Point2D abMid = new Point2D.Double((double) (a.x + b.x) / 2, (double) (a.y + b.y) / 2);
+        Point2D bcMid = new Point2D.Double((double) (b.x + c.x) / 2, (double) (b.y + c.y) / 2);
+
+        if (yDelta_a == 0)         //aSlope == 0
+        {
+            center_x = abMid.getX();
+            if (xDelta_b == 0)         //bSlope == INFINITY
+            {
+                center_y = bcMid.getY();
+            } else {
+                center_y = bcMid.getY() + (bcMid.getX() - center_x) / bSlope;
+            }
+        } else if (yDelta_b == 0)               //bSlope == 0
+        {
+            center_x = bcMid.getX();
+            if (xDelta_a == 0)             //aSlope == INFINITY
+            {
+                center_y = abMid.getY();
+            } else {
+                center_y = abMid.getY() + (abMid.getX() - center_x) / aSlope;
+            }
+        } else if (xDelta_a == 0)        //aSlope == INFINITY
+        {
+            center_y = abMid.getY();
+            center_x = bSlope * (bcMid.getY() - center_y) + bcMid.getX();
+        } else if (xDelta_b == 0)        //bSlope == INFINITY
+        {
+            center_y = bcMid.getY();
+            center_x = aSlope * (abMid.getY() - center_y) + abMid.getX();
+        } else {
+            center_x = (aSlope * bSlope * (abMid.getY() - bcMid.getY()) - aSlope * bcMid.getX()
+                    + bSlope * abMid.getX()) / (bSlope - aSlope);
+            center_y = abMid.getY() - (center_x - abMid.getX()) / aSlope;
+        }
+
+        double x = Math.abs(center_x - b.x);
+        double y = Math.abs(center_y - b.y);
+
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 }
