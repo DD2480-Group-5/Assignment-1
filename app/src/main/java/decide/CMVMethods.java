@@ -314,11 +314,33 @@ public class CMVMethods {
      *
      * @param points  : Array containing the coordinates of data points.
      * @param K_PTS   :
+     * @param LENGTH1 : 0 ≤ LENGTH1.
      * @param LENGTH2 : 0 ≤ LENGTH2.
      * @return true if condition 12 is satisfied, else false.
      */
-    public boolean CMV_12(Point[] points, int K_PTS, double LENGTH2) {
-        return false;
+    public boolean CMV_12(Point[] points, int K_PTS, double LENGTH1, double LENGTH2) {
+        int length = points.length;
+
+        if (length < 3) return false;
+
+        if (LENGTH1 < 0 || LENGTH2 < 0) return false;
+
+        boolean flag1 = CMV_7(points, K_PTS, LENGTH1);
+
+        boolean flag2 = false;
+
+        for (int i = 0; i < length - K_PTS - 1; i++) {
+            Point a = points[i];
+            Point b = points[i + K_PTS + 1];
+
+            double distance = calculateDistance(a, b);
+            if (distance < LENGTH2) {
+                flag2 = true;
+                break;
+            }
+        }
+
+        return flag1 && flag2;
     }
 
     /**
