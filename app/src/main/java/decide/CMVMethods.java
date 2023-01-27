@@ -3,6 +3,8 @@ package decide;
 import java.awt.*;
 import java.lang.Math;
 
+import org.checkerframework.checker.units.qual.Length;
+
 public class CMVMethods {
     // Implement the methods for section 2.1 in this class
 
@@ -34,12 +36,12 @@ public class CMVMethods {
     }
 
     /**
-     * Helper method for calculating radius of circumscribed circle of a triangle given by three points.
+     * Helper method for calculating the radius of circumscribed circle of a triangle given by three points.
      * 
      * @param p1 : Point 1. 
      * @param p2 : Point 2.
      * @param p3 : Point 3
-     * @return Radius of the circumscribed circle of a triangle given by @param p1, @param p2 and @param p3.
+     * @return Radius of the circumscribed circle of a triangle given by @param p1, @param p2 and @param p3 .
      */
     public static double circumscribedCircleRadius(Point p1, Point p2, Point p3) {
         double l1 = p2.distance(p3);
@@ -49,6 +51,44 @@ public class CMVMethods {
         double radius = l1 * l2 * l3 / (4 * Math.sqrt(p * (p - l1) * (p - l2) * (p - l3)));
         return radius;
     }
+
+    /**
+     * Helper method for calculating the area of an triangle given by three points.
+     * 
+     * @param p1 : Point 1.
+     * @param p2 : Point 2.
+     * @param p3 : Point 3.
+     * @return Area of an triangle given by @param p1, @param p2 and @param p3 .
+     */
+    public static double triangleArea(Point p1, Point p2, Point p3) {
+        double area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
+        return area;
+    }
+
+    /**
+     * Helper method for calculating the distance between a point and a line given by another two points.
+     * 
+     * @param p1 : The point.
+     * @param p2 : The point used to construct a line.
+     * @param p3 : Another point used to construct a line. 
+     * @return
+     */
+    public static double distanceFromPointToLine(Point p1, Point p2, Point p3) {
+        double slope;
+
+        /* case when the slope is infinity */
+        if (p3.getX() == p2.getX()) {
+            return Math.abs(p1.getX() - p2.getX());
+        }
+        else {
+            slope = (p3.getY() - p2.getY()) / (p3.getX() - p2.getX());
+        }
+        
+        double intercept = p2.getY() - slope * p2.getX();
+        double distance = Math.abs(slope * p1.getX() - p1.getY() + intercept) / Math.sqrt(1 + Math.pow(slope, 2));
+
+        return distance;
+    }   
 
     /**
      * CMV condition check 0.
@@ -146,7 +186,7 @@ public class CMVMethods {
 
             if (p1.equals(p2) || p2.equals(p3) || p1.equals(p3)) continue;
 
-            double area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
+            double area = triangleArea(p1, p2, p3);
 
             if (area > AREA1) return true;
         }
@@ -204,6 +244,23 @@ public class CMVMethods {
      * @return true if condition 6 is satisfied, else false.
      */
     public boolean CMV_6(Point[] points, int N_PTS, double DIST) {
+        if (!(N_PTS >= 3 && N_PTS <= points.length) || DIST < 0) return false;
+
+        Point p1, p2, p3;
+        for (int i = 0; i < points.length - N_PTS + 1; i++) {
+            p1 = points[i];
+            p3 = points[i + N_PTS - 1];
+            for (int j = i + 1; j < i + N_PTS - 1; j++) {
+                p2 = points[j];
+                if (p1.equals(p3)) {
+                    if (p2.distance(p1) > DIST) return true;
+                }
+                else {
+                    if (distanceFromPointToLine(p2, p1, p3) > DIST) return true;
+                }
+            }
+        }
+        
         return false;
     }
 
