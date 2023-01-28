@@ -99,7 +99,7 @@ public class CMVMethods {
      * @param LENGTH1 : The length threshold, must >= 0.
      * @return true if condition 0 is satisfied, else false.
      */
-    public boolean CMV_0(Point[] points, double LENGTH1) {
+    public static boolean CMV_0(Point[] points, double LENGTH1) {
         double point_distance;
         for (int i = 0; i < points.length - 1; i++) {
             point_distance = Math.sqrt(Math.pow(points[i].x - points[i + 1].x, 2) + Math.pow(points[i].y - points[i + 1].y, 2));
@@ -121,7 +121,7 @@ public class CMVMethods {
      * @param RADIUS1 : The radius threshold, must >= 0.
      * @return true if condition 1 is satisfied, else false.
      */
-    public boolean CMV_1(Point[] points, double RADIUS1) {
+    public static boolean CMV_1(Point[] points, double RADIUS1) {
         if (points.length < 3 || RADIUS1 < 0) return false;
 
         // Loop three points at a time
@@ -149,7 +149,7 @@ public class CMVMethods {
      * @param EPSILON : The angle threshold, 0 ≤ EPSILON < PI.
      * @return true if condition 2 is satisfied, else false.
      */
-    public boolean CMV_2(Point[] points, double EPSILON) {
+    public static boolean CMV_2(Point[] points, double EPSILON) {
         if ((points.length < 3) || (Math.abs(EPSILON) > Math.PI)) return false;
 
         // Loop three points at a time
@@ -175,7 +175,7 @@ public class CMVMethods {
      * @param AREA1  :  The area threshold, 0 ≤ AREA1.
      * @return true if condition 3 is satisfied, else false.
      */
-    public boolean CMV_3(Point[] points, double AREA1) {
+    public static boolean CMV_3(Point[] points, double AREA1) {
         if (points.length < 3) return false;
 
         Point p1, p2, p3;
@@ -206,7 +206,7 @@ public class CMVMethods {
      * @param QUADS  :  1 ≤ QUADS ≤ 3.
      * @return true if condition 4 is satisfied, else false.
      */
-    public boolean CMV_4(Point[] points, int Q_PTS, int QUADS) {
+    public static boolean CMV_4(Point[] points, int Q_PTS, int QUADS) {
         return false;
     }
 
@@ -218,7 +218,7 @@ public class CMVMethods {
      * @param points : Array containing the coordinates of data points.
      * @return true if condition 5 is satisfied, else false.
      */
-    public boolean CMV_5(Point[] points) {
+    public static boolean CMV_5(Point[] points) {
         if (points.length < 2) return false;
 
         Point p1, p2;
@@ -243,7 +243,7 @@ public class CMVMethods {
      * @param DIST   :   0 ≤ DIST
      * @return true if condition 6 is satisfied, else false.
      */
-    public boolean CMV_6(Point[] points, int N_PTS, double DIST) {
+    public static boolean CMV_6(Point[] points, int N_PTS, double DIST) {
         if (!(N_PTS >= 3 && N_PTS <= points.length) || DIST < 0) return false;
 
         Point p1, p2, p3;
@@ -276,7 +276,7 @@ public class CMVMethods {
      * @param LENGTH1 : The length threshold, LENGTH1 >= 0.
      * @return true if condition 7 is satisfied, else false.
      */
-    public boolean CMV_7(Point[] points, int K_PTS, double LENGTH1) {
+    public static boolean CMV_7(Point[] points, int K_PTS, double LENGTH1) {
         int length = points.length;
 
         if (K_PTS < 1 || K_PTS + 2 > length) return false;
@@ -307,7 +307,7 @@ public class CMVMethods {
      * @param RADIUS1 : 0 ≤ RADIUS1.
      * @return true if condition 8 is satisfied, else false.
      */
-    public boolean CMV_8(Point[] points, int A_PTS, int B_PTS, double RADIUS1) {
+    public static boolean CMV_8(Point[] points, int A_PTS, int B_PTS, double RADIUS1) {
         int length = points.length;
 
         if (A_PTS < 1 || B_PTS < 1 || A_PTS + B_PTS + 3 > length) return false;
@@ -345,7 +345,7 @@ public class CMVMethods {
      * @param EPSILON : 0 ≤ EPSILON < PI.
      * @return true if condition 9 is satisfied, else false.
      */
-    public boolean CMV_9(Point[] points, int C_PTS, int D_PTS, double EPSILON) {
+    public static boolean CMV_9(Point[] points, int C_PTS, int D_PTS, double EPSILON) {
         if (C_PTS < 1 || D_PTS < 1 || C_PTS + D_PTS > points.length - 3) return false;
 
         Point p1, p2, p3;
@@ -374,7 +374,7 @@ public class CMVMethods {
      * @param AREA1  :  0 ≤ AREA1.
      * @return true if condition 10 is satisfied, else false.
      */
-    public boolean CMV_10(Point[] points, int E_PTS, int F_PTS, double AREA1) {
+    public static boolean CMV_10(Point[] points, int E_PTS, int F_PTS, double AREA1) {
         if (E_PTS < 1 || F_PTS < 1 || E_PTS + F_PTS > points.length - 3) return false;
 
         Point p1, p2, p3;
@@ -398,7 +398,7 @@ public class CMVMethods {
      * @param G_PTS  :  1 ≤ G_PTS ≤ NUMPOINTS−2.
      * @return true if condition 11 is satisfied, else false.
      */
-    public boolean CMV_11(Point[] points, int G_PTS) {
+    public static boolean CMV_11(Point[] points, int G_PTS) {
         int length = points.length;
 
         if (length < 3) return false;
@@ -430,7 +430,7 @@ public class CMVMethods {
      * @param LENGTH2 : 0 ≤ LENGTH2.
      * @return true if condition 12 is satisfied, else false.
      */
-    public boolean CMV_12(Point[] points, int K_PTS, double LENGTH1, double LENGTH2) {
+    public static boolean CMV_12(Point[] points, int K_PTS, double LENGTH1, double LENGTH2) {
         int length = points.length;
 
         if (length < 3) return false;
@@ -472,7 +472,7 @@ public class CMVMethods {
      * @param RADIUS2 : 0 ≤ RADIUS2
      * @return true if condition 13 is satisfied, else false.
      */
-    public boolean CMV_13(Point[] points, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
+    public static boolean CMV_13(Point[] points, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
         if (A_PTS < 1 || B_PTS < 1 || A_PTS + B_PTS > points.length - 3 || RADIUS1 < 0 || RADIUS2 < 0) return false;
 
         boolean flag = CMV_8(points, A_PTS, B_PTS, RADIUS1);
@@ -505,7 +505,7 @@ public class CMVMethods {
      * @param AREA2  :  0 ≤ AREA2.
      * @return true if condition 14 is satisfied, else false.
      */
-    public boolean CMV_14(Point[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
+    public static boolean CMV_14(Point[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
         return false;
     }
 }
