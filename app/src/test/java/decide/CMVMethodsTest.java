@@ -4,8 +4,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.awt.geom.Point2D;
-import java.lang.Math;
-import java.awt.Point;
 
 public class CMVMethodsTest {
     
@@ -62,6 +60,35 @@ public class CMVMethodsTest {
     void testNegativeCmv5() {
         Point2D[] points = {new Point2D.Double(0, 0)};
         boolean b = CMVMethods.CMV_5(points);
+        assertFalse(b);
+    }
+
+    @Test
+    void testPositiveCmv6() {
+        Point2D[] points = {
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(1, 0), 
+            new Point2D.Double(2, 0),
+            new Point2D.Double(3, 3),
+            new Point2D.Double(4, 2)
+        };
+        int n_pts = 4;
+        double dist = 1;
+        boolean b = CMVMethods.CMV_6(points, n_pts, dist);
+        assertTrue(b);
+    }
+
+    @Test
+    void testNegativeCmv6() {
+        Point2D[] points = {
+            new Point2D.Double(0, 0), 
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(-2, 0),
+            new Point2D.Double(2, 2)
+        };
+        int n_pts = 5;
+        double dist = 2;
+        boolean b = CMVMethods.CMV_6(points, n_pts, dist);
         assertFalse(b);
     }
 
