@@ -1,6 +1,6 @@
 package decide;
 
-import java.awt.*;
+import java.awt.geom.Point2D;
 import java.lang.Math;
 
 import org.checkerframework.checker.units.qual.Length;
@@ -16,14 +16,14 @@ public class CMVMethods {
      * @param p3 :  Point 3, end point for line 2.
      * @return Angle in degrees.
      */
-    public static double angleBetweenThreePoints(Point p1, Point p2, Point p3) {
-        double x = p1.x;
-        double y = p1.y;
+    public static double angleBetweenThreePoints(Point2D p1, Point2D p2, Point2D p3) {
+        double x = p1.getX();
+        double y = p1.getY();
 
-        double slopeAx = p2.x - x;
-        double slopeAy = p2.y - y;
-        double slopeBx = p3.x - x;
-        double slopeBy = p3.y - y;
+        double slopeAx = p2.getX() - x;
+        double slopeAy = p2.getY() - y;
+        double slopeBx = p3.getX() - x;
+        double slopeBy = p3.getY() - y;
 
         double d = (slopeAx * slopeBx + slopeAy * slopeBy) / Math.sqrt((slopeAx * slopeAx + slopeAy * slopeAy) * (slopeBx * slopeBx + slopeBy * slopeBy));
 
@@ -43,7 +43,7 @@ public class CMVMethods {
      * @param p3 : Point 3
      * @return Radius of the circumscribed circle of a triangle given by @param p1, @param p2 and @param p3 .
      */
-    public static double circumscribedCircleRadius(Point p1, Point p2, Point p3) {
+    public static double circumscribedCircleRadius(Point2D p1, Point2D p2, Point2D p3) {
         double l1 = p2.distance(p3);
         double l2 = p1.distance(p3);
         double l3 = p1.distance(p2);
@@ -60,8 +60,8 @@ public class CMVMethods {
      * @param p3 : Point 3.
      * @return Area of an triangle given by @param p1, @param p2 and @param p3 .
      */
-    public static double triangleArea(Point p1, Point p2, Point p3) {
-        double area = Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
+    public static double triangleArea(Point2D p1, Point2D p2, Point2D p3) {
+        double area = Math.abs((p1.getX() * (p2.getY() - p3.getY()) + p2.getX() * (p3.getY() - p1.getY()) + p3.getX() * (p1.getY() - p2.getY())) / 2);
         return area;
     }
 
@@ -73,7 +73,7 @@ public class CMVMethods {
      * @param p3 : Another point used to construct a line. 
      * @return
      */
-    public static double distanceFromPointToLine(Point p1, Point p2, Point p3) {
+    public static double distanceFromPointToLine(Point2D p1, Point2D p2, Point2D p3) {
         double slope;
 
         /* case when the slope is infinity */
@@ -99,10 +99,10 @@ public class CMVMethods {
      * @param LENGTH1 : The length threshold, must >= 0.
      * @return true if condition 0 is satisfied, else false.
      */
-    public static boolean CMV_0(Point[] points, double LENGTH1) {
+    public static boolean CMV_0(Point2D[] points, double LENGTH1) {
         double point_distance;
         for (int i = 0; i < points.length - 1; i++) {
-            point_distance = Math.sqrt(Math.pow(points[i].x - points[i + 1].x, 2) + Math.pow(points[i].y - points[i + 1].y, 2));
+            point_distance = Math.sqrt(Math.pow(points[i].getX() - points[i + 1].getX(), 2) + Math.pow(points[i].getY() - points[i + 1].getY(), 2));
 
             if (point_distance > LENGTH1) {
                 return true;
@@ -121,11 +121,11 @@ public class CMVMethods {
      * @param RADIUS1 : The radius threshold, must >= 0.
      * @return true if condition 1 is satisfied, else false.
      */
-    public static boolean CMV_1(Point[] points, double RADIUS1) {
+    public static boolean CMV_1(Point2D[] points, double RADIUS1) {
         if (points.length < 3 || RADIUS1 < 0) return false;
 
         // Loop three points at a time
-        Point p1, p2, p3;
+        Point2D p1, p2, p3;
         for (int i = 1; i < (points.length - 1); i++) {
             p1 = points[i - 1];
             p2 = points[i];
@@ -149,11 +149,11 @@ public class CMVMethods {
      * @param EPSILON : The angle threshold, 0 ≤ EPSILON < PI.
      * @return true if condition 2 is satisfied, else false.
      */
-    public static boolean CMV_2(Point[] points, double EPSILON) {
+    public static boolean CMV_2(Point2D[] points, double EPSILON) {
         if ((points.length < 3) || (Math.abs(EPSILON) > Math.PI)) return false;
 
         // Loop three points at a time
-        Point p1, p2, p3;
+        Point2D p1, p2, p3;
         for (int i = 1; i < (points.length - 1); i++) {
             p1 = points[i - 1];
             p2 = points[i];
@@ -175,10 +175,10 @@ public class CMVMethods {
      * @param AREA1  :  The area threshold, 0 ≤ AREA1.
      * @return true if condition 3 is satisfied, else false.
      */
-    public static boolean CMV_3(Point[] points, double AREA1) {
+    public static boolean CMV_3(Point2D[] points, double AREA1) {
         if (points.length < 3) return false;
 
-        Point p1, p2, p3;
+        Point2D p1, p2, p3;
         for (int i = 0; i < (points.length) - 2; ++i) {
             p1 = points[i];
             p2 = points[i + 1];
@@ -206,7 +206,7 @@ public class CMVMethods {
      * @param QUADS  :  1 ≤ QUADS ≤ 3.
      * @return true if condition 4 is satisfied, else false.
      */
-    public static boolean CMV_4(Point[] points, int Q_PTS, int QUADS) {
+    public static boolean CMV_4(Point2D[] points, int Q_PTS, int QUADS) {
         if(Q_PTS < 2 || Q_PTS > points.length) return false;
 
         if(QUADS < 1 || QUADS > 3) return false;
@@ -221,8 +221,8 @@ public class CMVMethods {
             existsInQuadrant =  new boolean[]{false, false, false, false};
 
             for (int j = 0; j < Q_PTS; j++) {
-                x = points[i + j].x;
-                y = points[i + j].y;
+                x = points[i + j].getX();
+                y = points[i + j].getY();
 
                 if (x >= 0 && y >= 0) 
                     existsInQuadrant[0] = true;
@@ -241,7 +241,7 @@ public class CMVMethods {
 
             if (totalQuadrants > QUADS) return true;
         }
-        
+
         return false;
     }
 
@@ -253,10 +253,10 @@ public class CMVMethods {
      * @param points : Array containing the coordinates of data points.
      * @return true if condition 5 is satisfied, else false.
      */
-    public static boolean CMV_5(Point[] points) {
+    public static boolean CMV_5(Point2D[] points) {
         if (points.length < 2) return false;
 
-        Point p1, p2;
+        Point2D p1, p2;
         for (int i = 0; i < points.length - 1; i++) {
             p1 = points[i];
             p2 = points[i + 1];
@@ -278,10 +278,10 @@ public class CMVMethods {
      * @param DIST   :   0 ≤ DIST
      * @return true if condition 6 is satisfied, else false.
      */
-    public static boolean CMV_6(Point[] points, int N_PTS, double DIST) {
+    public static boolean CMV_6(Point2D[] points, int N_PTS, double DIST) {
         if (!(N_PTS >= 3 && N_PTS <= points.length) || DIST < 0) return false;
 
-        Point p1, p2, p3;
+        Point2D p1, p2, p3;
         for (int i = 0; i < points.length - N_PTS + 1; i++) {
             p1 = points[i];
             p3 = points[i + N_PTS - 1];
@@ -311,7 +311,7 @@ public class CMVMethods {
      * @param LENGTH1 : The length threshold, LENGTH1 >= 0.
      * @return true if condition 7 is satisfied, else false.
      */
-    public static boolean CMV_7(Point[] points, int K_PTS, double LENGTH1) {
+    public static boolean CMV_7(Point2D[] points, int K_PTS, double LENGTH1) {
         int length = points.length;
 
         if (K_PTS < 1 || K_PTS + 2 > length) return false;
@@ -321,8 +321,8 @@ public class CMVMethods {
         if (length < 3) return false;
 
         for (int i = 0; i < length - K_PTS - 1; i++) {
-            Point a = points[i];
-            Point b = points[i + K_PTS + 1];
+            Point2D a = points[i];
+            Point2D b = points[i + K_PTS + 1];
 
             double distance = a.distance(b);
             if (distance > LENGTH1) return true;
@@ -342,7 +342,7 @@ public class CMVMethods {
      * @param RADIUS1 : 0 ≤ RADIUS1.
      * @return true if condition 8 is satisfied, else false.
      */
-    public static boolean CMV_8(Point[] points, int A_PTS, int B_PTS, double RADIUS1) {
+    public static boolean CMV_8(Point2D[] points, int A_PTS, int B_PTS, double RADIUS1) {
         int length = points.length;
 
         if (A_PTS < 1 || B_PTS < 1 || A_PTS + B_PTS + 3 > length) return false;
@@ -352,9 +352,9 @@ public class CMVMethods {
         if (RADIUS1 < 0) return false;
 
         for (int i = 0; i < length - A_PTS - B_PTS - 2; i++) {
-            Point a = points[i];
-            Point b = points[i + A_PTS + 1];
-            Point c = points[i + A_PTS + 1 + B_PTS + 1];
+            Point2D a = points[i];
+            Point2D b = points[i + A_PTS + 1];
+            Point2D c = points[i + A_PTS + 1 + B_PTS + 1];
 
             double r = circumscribedCircleRadius(a, b, c);
 
@@ -380,10 +380,10 @@ public class CMVMethods {
      * @param EPSILON : 0 ≤ EPSILON < PI.
      * @return true if condition 9 is satisfied, else false.
      */
-    public static boolean CMV_9(Point[] points, int C_PTS, int D_PTS, double EPSILON) {
+    public static boolean CMV_9(Point2D[] points, int C_PTS, int D_PTS, double EPSILON) {
         if (C_PTS < 1 || D_PTS < 1 || C_PTS + D_PTS > points.length - 3) return false;
 
-        Point p1, p2, p3;
+        Point2D p1, p2, p3;
         for (int i = 0; i < points.length - C_PTS - D_PTS - 2; i++) {
             p1 = points[i];
             p2 = points[i + C_PTS + 1];
@@ -409,10 +409,10 @@ public class CMVMethods {
      * @param AREA1  :  0 ≤ AREA1.
      * @return true if condition 10 is satisfied, else false.
      */
-    public static boolean CMV_10(Point[] points, int E_PTS, int F_PTS, double AREA1) {
+    public static boolean CMV_10(Point2D[] points, int E_PTS, int F_PTS, double AREA1) {
         if (E_PTS < 1 || F_PTS < 1 || E_PTS + F_PTS > points.length - 3) return false;
 
-        Point p1, p2, p3;
+        Point2D p1, p2, p3;
         for (int i = 0; i < points.length - E_PTS - F_PTS - 2; i++) {
             p1 = points[i];
             p2 = points[i + E_PTS + 1];
@@ -433,7 +433,7 @@ public class CMVMethods {
      * @param G_PTS  :  1 ≤ G_PTS ≤ NUMPOINTS−2.
      * @return true if condition 11 is satisfied, else false.
      */
-    public static boolean CMV_11(Point[] points, int G_PTS) {
+    public static boolean CMV_11(Point2D[] points, int G_PTS) {
         int length = points.length;
 
         if (length < 3) return false;
@@ -441,10 +441,10 @@ public class CMVMethods {
         if (G_PTS < 1 || G_PTS + 2 > length) return false;
 
         for (int i = 0; i < length - G_PTS - 1; i++) {
-            Point a = points[i];
-            Point b = points[i + G_PTS + 1];
+            Point2D a = points[i];
+            Point2D b = points[i + G_PTS + 1];
 
-            if (b.x - a.x < 0) return true;
+            if (b.getX() - a.getX() < 0) return true;
         }
 
         return false;
@@ -465,7 +465,7 @@ public class CMVMethods {
      * @param LENGTH2 : 0 ≤ LENGTH2.
      * @return true if condition 12 is satisfied, else false.
      */
-    public static boolean CMV_12(Point[] points, int K_PTS, double LENGTH1, double LENGTH2) {
+    public static boolean CMV_12(Point2D[] points, int K_PTS, double LENGTH1, double LENGTH2) {
         int length = points.length;
 
         if (length < 3) return false;
@@ -477,8 +477,8 @@ public class CMVMethods {
         boolean flag2 = false;
 
         for (int i = 0; i < length - K_PTS - 1; i++) {
-            Point a = points[i];
-            Point b = points[i + K_PTS + 1];
+            Point2D a = points[i];
+            Point2D b = points[i + K_PTS + 1];
 
             double distance = a.distance(b);
             if (distance < LENGTH2) {
@@ -507,13 +507,13 @@ public class CMVMethods {
      * @param RADIUS2 : 0 ≤ RADIUS2
      * @return true if condition 13 is satisfied, else false.
      */
-    public static boolean CMV_13(Point[] points, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
+    public static boolean CMV_13(Point2D[] points, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
         if (A_PTS < 1 || B_PTS < 1 || A_PTS + B_PTS > points.length - 3 || RADIUS1 < 0 || RADIUS2 < 0) return false;
 
         boolean flag = CMV_8(points, A_PTS, B_PTS, RADIUS1);
         if (!flag) return false;
 
-        Point p1, p2, p3;
+        Point2D p1, p2, p3;
         for (int i = 0; i < points.length - A_PTS - B_PTS - 2; i++) {
             p1 = points[i];
             p2 = points[i + A_PTS + 1];
@@ -540,7 +540,7 @@ public class CMVMethods {
      * @param AREA2  :  0 ≤ AREA2.
      * @return true if condition 14 is satisfied, else false.
      */
-    public static boolean CMV_14(Point[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
+    public static boolean CMV_14(Point2D[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
         return false;
     }
 }
