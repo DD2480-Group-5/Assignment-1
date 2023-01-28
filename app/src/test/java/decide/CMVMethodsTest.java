@@ -187,4 +187,38 @@ public class CMVMethodsTest {
         boolean b = CMVMethods.CMV_13(points, a_pts, b_pts, radius1, radius2);
         assertFalse(b);
     }
+
+    @Test
+    void testPositiveCmv14() {
+        Point2D[] points = {
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(1, 1), 
+            new Point2D.Double(0, 0),
+            new Point2D.Double(2, 2),
+            new Point2D.Double(2, 0),
+            new Point2D.Double(3, 1)
+        };
+        int e_pts = 1;
+        int f_pts = 1;
+        double area1 = 1;
+        double area2 = 2;
+        boolean b = CMVMethods.CMV_14(points, e_pts, f_pts, area1, area2);
+        assertTrue(b);
+    }
+
+    @Test
+    void testNegativeCmv14() {
+        Point2D[] points = {
+            new Point2D.Double(0, 0), 
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(-2, 0),
+            new Point2D.Double(2, 2)
+        };
+        int e_pts = 1;
+        int f_pts = 1;
+        double area1 = -1;
+        double area2 = 2;
+        boolean b = CMVMethods.CMV_14(points, e_pts, f_pts, area1, area2);
+        assertFalse(b);
+    }
 }
