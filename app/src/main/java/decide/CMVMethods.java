@@ -3,8 +3,6 @@ package decide;
 import java.awt.geom.Point2D;
 import java.lang.Math;
 
-import org.checkerframework.checker.units.qual.Length;
-
 public class CMVMethods {
     // Implement the methods for section 2.1 in this class
 
@@ -541,6 +539,19 @@ public class CMVMethods {
      * @return true if condition 14 is satisfied, else false.
      */
     public static boolean CMV_14(Point2D[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
+        if (E_PTS < 1 || F_PTS < 1 || E_PTS + F_PTS > points.length - 3 || AREA1 < 0 || AREA2 < 0) return false;
+
+        boolean flag = CMV_10(points, E_PTS, F_PTS, AREA1);
+        if (!flag) return false;
+
+        Point2D p1, p2, p3;
+        for (int i = 0; i < points.length - E_PTS - F_PTS - 2; i++) {
+            p1 = points[i];
+            p2 = points[i + E_PTS + 1];
+            p3 = points[i + E_PTS + F_PTS + 2];
+            if (triangleArea(p1, p2, p3) < AREA2) return true;
+        }
+
         return false;
     }
 }
