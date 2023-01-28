@@ -1,7 +1,7 @@
 package decide;
 
 import static java.lang.Math.PI;
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 public class Decide {
 
@@ -24,7 +24,7 @@ public class Decide {
     private double LENGTH2;
     private double RADIUS2;
     private double AREA2;
-    private Point[] points;
+    private Point2D[] points;
     private Connector[][] LCM;
     private boolean[][] PUV;
 
@@ -47,7 +47,7 @@ public class Decide {
             double LENGTH2,
             double RADIUS2,
             double AREA2,
-            Point[] points,
+            Point2D[] points,
             Connector[][] LCM,
             boolean[][] PUV) {
         this.LENGTH1 = LENGTH1;
