@@ -264,6 +264,42 @@ public class CMVMethodsTest {
     }
 
     @Test
+    void testPositiveCmv12() {
+        Point2D[] points = {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(0, 2),
+                new Point2D.Double(5, 0),
+                new Point2D.Double(2, 2),
+                new Point2D.Double(4, 1)
+        };
+        int k_pts = 1;
+        double length1 = 3, length2 = 2;
+        assertTrue(CMVMethods.CMV_12(points, k_pts, length1, length2));
+    }
+
+    @Test
+    void testNegativeCmv12() {
+        Point2D[] points = {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(0, 2),
+                new Point2D.Double(5, 0),
+                new Point2D.Double(2, 2),
+                new Point2D.Double(4, 1)
+        };
+        Point2D[] points_2 = {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(0, 2)
+        };
+        int k_pts = 1;
+        int k_pts_f = 4;
+        double length1 = 3, length2 = 2;
+        double length1_f = 6;
+        assertFalse(CMVMethods.CMV_12(points, k_pts, length1_f, length2));
+        assertFalse(CMVMethods.CMV_12(points, k_pts_f, length1, length2));
+        assertFalse(CMVMethods.CMV_12(points_2, k_pts, length1, length2));
+    }
+
+    @Test
     void testPositiveCmv13() {
         Point2D[] points = {
                 new Point2D.Double(0, 2),
