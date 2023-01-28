@@ -123,4 +123,35 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    @Test
+    void testPositiveCmv10() {
+        Point2D[] points = {
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(1, 1), 
+            new Point2D.Double(0, 0),
+            new Point2D.Double(2, 2),
+            new Point2D.Double(2, 0)
+        };
+        int e_pts = 1;
+        int f_pts = 1;
+        double area1 = 1;
+        boolean b = CMVMethods.CMV_10(points, e_pts, f_pts, area1);
+        assertTrue(b);
+    }
+
+    @Test
+    void testNegativeCmv10() {
+        Point2D[] points = {
+            new Point2D.Double(0, 0), 
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(-2, 0),
+            new Point2D.Double(2, 2)
+        };
+        int e_pts = 1;
+        int f_pts = 1;
+        double area1 = -1;
+        boolean b = CMVMethods.CMV_10(points, e_pts, f_pts, area1);
+        assertFalse(b);
+    }
+
 }
