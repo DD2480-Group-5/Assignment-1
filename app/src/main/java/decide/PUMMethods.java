@@ -5,17 +5,18 @@ public class PUMMethods {
 
     /**
      * Method used to generate Preliminary Unlocking Matirx (PUM) given CMV and LCM, based on section 2.2.
+     * 
      * @param CMV : Condition Met Vector
      * @param LCM : Logical Connector Matrix
      * @return PUM
      */
     public static boolean[][] PUM(boolean[] CMV, Connector[][] LCM) {
-        int numRow = LCM.length;
-        int numCol = LCM[0].length;
-        boolean[][] PUM = new boolean[numRow][numCol];
+        assert (CMV.length == CMVMethods.NUMLIC && LCM.length == CMVMethods.NUMLIC && LCM[0].length == CMVMethods.NUMLIC);
 
-        for (int i = 0; i < numRow; i++) {
-            for (int j = 0; j < numCol; j++) {
+        boolean[][] PUM = new boolean[CMVMethods.NUMLIC][CMVMethods.NUMLIC];
+
+        for (int i = 0; i < CMVMethods.NUMLIC; i++) {
+            for (int j = 0; j < CMVMethods.NUMLIC; j++) {
                 if (LCM[i][j] == Connector.NOTUSED) {
                     PUM[i][j] = true;
                 }

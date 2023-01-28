@@ -5,6 +5,7 @@ import java.lang.Math;
 
 public class CMVMethods {
     // Implement the methods for section 2.1 in this class
+    public static final int NUMLIC = 15;
 
     /**
      * Helper method for calculating the angle between the two lines formed by three points.
