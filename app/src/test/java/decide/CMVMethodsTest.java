@@ -129,12 +129,36 @@ public class CMVMethodsTest {
 
     @Test
     void testPositiveCmv8() {
-
+        Point2D[] points = {
+                new Point2D.Double(0, 2),
+                new Point2D.Double(0, -2),
+                new Point2D.Double(2, 0),
+                new Point2D.Double(-2, 0),
+                new Point2D.Double(0, 1),
+                new Point2D.Double(4, 0),
+        };
+        int a_pts = 1, b_pts = 1;
+        double radius2 = 2;
+        assertTrue(CMVMethods.CMV_8(points, a_pts, b_pts, radius2));
     }
 
     @Test
     void testNegativeCmv8() {
-
+        Point2D[] points = {
+                new Point2D.Double(0, 2),
+                new Point2D.Double(0, -2),
+                new Point2D.Double(2, 0),
+                new Point2D.Double(-2, 0),
+                new Point2D.Double(0, 1),
+                new Point2D.Double(1, 0),
+        };
+        int a_pts = 1, b_pts = 1;
+        int a_pts_f = 5;
+        double radius2 = 2;
+        double radius2_f = -2;
+        assertFalse(CMVMethods.CMV_8(points, a_pts, b_pts, radius2));
+        assertFalse(CMVMethods.CMV_8(points, a_pts_f, b_pts, radius2));
+        assertFalse(CMVMethods.CMV_8(points, a_pts, b_pts, radius2_f));
     }
 
     @Test
