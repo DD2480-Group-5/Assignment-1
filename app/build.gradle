@@ -26,5 +26,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'group.dd2480.App'
+    mainClass = 'decide.Decide'
 }
