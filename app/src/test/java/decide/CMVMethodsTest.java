@@ -25,4 +25,25 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    @Test
+    void testPositiveCmv1() {
+        Point2D[] points = {
+            new Point2D.Double(0, 0), 
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(2, 0),
+            new Point2D.Double(2, 2)
+        };
+        double radius = 1;
+        boolean b = CMVMethods.CMV_1(points, radius);
+        assertTrue(b);
+    }
+
+    @Test
+    void testNegativeCmv1() {
+        Point2D[] points = {new Point2D.Double(0, 0), new Point2D.Double(2, 2)};
+        double radius = 5;
+        boolean b = CMVMethods.CMV_1(points, radius);
+        assertFalse(b);
+    }
+
 }
