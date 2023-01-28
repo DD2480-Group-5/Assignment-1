@@ -207,6 +207,41 @@ public class CMVMethods {
      * @return true if condition 4 is satisfied, else false.
      */
     public static boolean CMV_4(Point[] points, int Q_PTS, int QUADS) {
+        if(Q_PTS < 2 || Q_PTS > points.length) return false;
+
+        if(QUADS < 1 || QUADS > 3) return false;
+
+        boolean[] existsInQuadrant = new boolean[4];
+        int totalQuadrants = 0;
+
+        double x, y;
+        for (int i = 0; i < points.length; i++) {
+            totalQuadrants = 0;
+
+            existsInQuadrant =  new boolean[]{false, false, false, false};
+
+            for (int j = 0; j < Q_PTS; j++) {
+                x = points[i + j].x;
+                y = points[i + j].y;
+
+                if (x >= 0 && y >= 0) 
+                    existsInQuadrant[0] = true;
+                else if (x > 0 && y < 0) 
+                    existsInQuadrant[1] = true;
+                else if (x < 0 && y > 0) 
+                    existsInQuadrant[2] = true;
+                else 
+                    existsInQuadrant[3] = true;
+                
+            }
+
+            for (boolean b : existsInQuadrant) {
+                if(b) totalQuadrants++;
+            }
+
+            if (totalQuadrants > QUADS) return true;
+        }
+        
         return false;
     }
 
