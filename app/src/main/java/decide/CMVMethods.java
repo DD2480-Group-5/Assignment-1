@@ -36,8 +36,8 @@ public class CMVMethods {
 
     /**
      * Helper method for calculating the radius of circumscribed circle of a triangle given by three points.
-     * 
-     * @param p1 : Point 1. 
+     *
+     * @param p1 : Point 1.
      * @param p2 : Point 2.
      * @param p3 : Point 3
      * @return Radius of the circumscribed circle of a triangle given by @param p1, @param p2 and @param p3 .
@@ -53,7 +53,7 @@ public class CMVMethods {
 
     /**
      * Helper method for calculating the area of an triangle given by three points.
-     * 
+     *
      * @param p1 : Point 1.
      * @param p2 : Point 2.
      * @param p3 : Point 3.
@@ -66,10 +66,10 @@ public class CMVMethods {
 
     /**
      * Helper method for calculating the distance between a point and a line given by another two points.
-     * 
+     *
      * @param p1 : The point.
      * @param p2 : The point used to construct a line.
-     * @param p3 : Another point used to construct a line. 
+     * @param p3 : Another point used to construct a line.
      * @return
      */
     public static double distanceFromPointToLine(Point2D p1, Point2D p2, Point2D p3) {
@@ -78,16 +78,15 @@ public class CMVMethods {
         /* case when the slope is infinity */
         if (p3.getX() == p2.getX()) {
             return Math.abs(p1.getX() - p2.getX());
-        }
-        else {
+        } else {
             slope = (p3.getY() - p2.getY()) / (p3.getX() - p2.getX());
         }
-        
+
         double intercept = p2.getY() - slope * p2.getX();
         double distance = Math.abs(slope * p1.getX() - p1.getY() + intercept) / Math.sqrt(1 + Math.pow(slope, 2));
 
         return distance;
-    }   
+    }
 
     /**
      * CMV condition check 0.
@@ -206,9 +205,9 @@ public class CMVMethods {
      * @return true if condition 4 is satisfied, else false.
      */
     public static boolean CMV_4(Point2D[] points, int Q_PTS, int QUADS) {
-        if(Q_PTS < 2 || Q_PTS > points.length) return false;
+        if (Q_PTS < 2 || Q_PTS > points.length) return false;
 
-        if(QUADS < 1 || QUADS > 3) return false;
+        if (QUADS < 1 || QUADS > 3) return false;
 
         boolean[] existsInQuadrant = new boolean[4];
         int totalQuadrants = 0;
@@ -217,25 +216,25 @@ public class CMVMethods {
         for (int i = 0; i < points.length; i++) {
             totalQuadrants = 0;
 
-            existsInQuadrant =  new boolean[]{false, false, false, false};
+            existsInQuadrant = new boolean[]{false, false, false, false};
 
             for (int j = 0; j < Q_PTS; j++) {
                 x = points[i + j].getX();
                 y = points[i + j].getY();
 
-                if (x >= 0 && y >= 0) 
+                if (x >= 0 && y >= 0)
                     existsInQuadrant[0] = true;
-                else if (x > 0 && y < 0) 
+                else if (x > 0 && y < 0)
                     existsInQuadrant[1] = true;
-                else if (x < 0 && y > 0) 
+                else if (x < 0 && y > 0)
                     existsInQuadrant[2] = true;
-                else 
+                else
                     existsInQuadrant[3] = true;
-                
+
             }
 
             for (boolean b : existsInQuadrant) {
-                if(b) totalQuadrants++;
+                if (b) totalQuadrants++;
             }
 
             if (totalQuadrants > QUADS) return true;
@@ -288,13 +287,12 @@ public class CMVMethods {
                 p2 = points[j];
                 if (p1.equals(p3)) {
                     if (p2.distance(p1) > DIST) return true;
-                }
-                else {
+                } else {
                     if (distanceFromPointToLine(p2, p1, p3) > DIST) return true;
                 }
             }
         }
-        
+
         return false;
     }
 
@@ -468,6 +466,8 @@ public class CMVMethods {
         int length = points.length;
 
         if (length < 3) return false;
+
+        if (K_PTS > length - 2) return false;
 
         if (LENGTH1 < 0 || LENGTH2 < 0) return false;
 
