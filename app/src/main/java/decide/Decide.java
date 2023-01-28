@@ -28,6 +28,10 @@ public class Decide {
     private Connector[][] LCM;
     private boolean[][] PUV;
 
+    public static void main(String[] args) {
+        System.exit(0);
+    }
+
     Decide(double LENGTH1,
             double RADIUS1,
             double EPSILON,
