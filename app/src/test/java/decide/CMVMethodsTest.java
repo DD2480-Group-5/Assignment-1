@@ -92,4 +92,35 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    @Test
+    void testPositiveCmv9() {
+        Point2D[] points = {
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(1, 1), 
+            new Point2D.Double(0, 0),
+            new Point2D.Double(2, 2),
+            new Point2D.Double(2, 0)
+        };
+        int c_pts = 1;
+        int d_pts = 1;
+        double epsilon = 0.1 * Math.PI;
+        boolean b = CMVMethods.CMV_9(points, c_pts, d_pts, epsilon);
+        assertTrue(b);
+    }
+
+    @Test
+    void testNegativeCmv9() {
+        Point2D[] points = {
+            new Point2D.Double(0, 0), 
+            new Point2D.Double(0, 2), 
+            new Point2D.Double(-2, 0),
+            new Point2D.Double(2, 2)
+        };
+        int c_pts = 1;
+        int d_pts = 4;
+        double epsilon = 0.2;
+        boolean b = CMVMethods.CMV_9(points, c_pts, d_pts, epsilon);
+        assertFalse(b);
+    }
+
 }
