@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.awt.geom.Point2D;
 import java.util.Arrays;
 
 public class LAUNCHMethodsTest {
