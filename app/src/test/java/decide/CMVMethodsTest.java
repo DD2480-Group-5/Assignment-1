@@ -98,6 +98,35 @@ public class CMVMethodsTest {
     }
 
     @Test
+    void testPositiveCmv4() {
+        Point2D[] points = {
+            new Point2D.Double(-1.0, 1.0),
+            new Point2D.Double(-0.5, 2.0),
+            new Point2D.Double(0.2, -4),
+            new Point2D.Double(-2.0, 4.0),
+            new Point2D.Double(1.5, 2.5),
+            new Point2D.Double(0.5, 5.0)
+        };
+        boolean eval = CMVMethods.CMV_4(points, 3, 2);
+        assertTrue(eval);
+    }
+
+    @Test
+    void testNegativeCmv4() {
+        Point2D[] points = {
+            new Point2D.Double(-1.0, 1.0),
+            new Point2D.Double(-0.5, 2.0),
+            new Point2D.Double(-0.5, 4.0),
+            new Point2D.Double(-2.5, 4.0), 
+            new Point2D.Double(1.0, 2.0),
+            new Point2D.Double(0.5, 5.0)
+        };
+        boolean eval = CMVMethods.CMV_4(points, 3, 2);
+        assertFalse(eval);
+    }
+
+
+    @Test
     void testPositiveCmv5() {
         Point2D[] points = {
                 new Point2D.Double(0, 0),
