@@ -2,8 +2,6 @@ package decide;
 
 import static decide.CMVMethods.NUMLIC;
 
-import javax.sound.sampled.SourceDataLine;
-
 public class FUVMethods {
     // Implement the methods for section 2.3 in this class
 
