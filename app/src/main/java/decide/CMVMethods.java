@@ -209,11 +209,11 @@ public class CMVMethods {
 
         if (QUADS < 1 || QUADS > 3) return false;
 
-        boolean[] existsInQuadrant = new boolean[4];
+        boolean[] existsInQuadrant = new boolean[]{false, false, false, false};
         int totalQuadrants = 0;
 
         double x, y;
-        for (int i = 0; i < points.length; i++) {
+        for (int i = 0; i < points.length - Q_PTS; i++) {
             totalQuadrants = 0;
 
             existsInQuadrant = new boolean[]{false, false, false, false};
