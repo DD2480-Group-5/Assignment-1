@@ -13,7 +13,7 @@ public class CMVMethods {
      * @param p1 :  Point 1, this is the point the lines start from.
      * @param p2 :  Point 2, end point for line 1.
      * @param p3 :  Point 3, end point for line 2.
-     * @return Angle in degrees.
+     * @return Angle in radians.
      */
     public static double angleBetweenThreePoints(Point2D p1, Point2D p2, Point2D p3) {
         double x = p1.getX();
@@ -28,10 +28,10 @@ public class CMVMethods {
 
         if (d > 1.0) return 0.0;
 
-        else if (d < -1.0) return Math.PI;
+        else if (d < -1.0) return 180.0;
 
 
-        return Math.toRadians(Math.acos(d));
+        return Math.toRadians(Math.toDegrees(Math.acos(d)));
     }
 
     /**
