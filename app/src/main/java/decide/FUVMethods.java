@@ -1,5 +1,9 @@
 package decide;
 
+import static decide.CMVMethods.NUMLIC;
+
+import javax.sound.sampled.SourceDataLine;
+
 public class FUVMethods {
     // Implement the methods for section 2.3 in this class
 
@@ -11,22 +15,26 @@ public class FUVMethods {
      * @return FUV
      */
     public static boolean[] FUV(boolean[] PUV, boolean[][] PUM) {
-        assert (PUV.length == CMVMethods.NUMLIC && PUM.length == CMVMethods.NUMLIC && PUM[0].length == CMVMethods.NUMLIC);
+        assert (PUV.length == NUMLIC && PUM.length == NUMLIC && PUM[0].length == NUMLIC);
 
-        boolean[] FUV = new boolean[CMVMethods.NUMLIC];
+        boolean[] FUV = new boolean[NUMLIC];
         
-        for (int i = 0; i < CMVMethods.NUMLIC; i++) {
-            FUV[i] = true;
+        for (int i = 0; i < NUMLIC; i++) {
             if (PUV[i]) {
-                for (int j = 0; j < CMVMethods.NUMLIC; j++) {
-                    if (j == i) continue;
+                FUV[i] = true;
+                for (int j = 0; j < NUMLIC; j++) {
+                    if (i == j) continue;
                     if (!PUM[i][j]) {
                         FUV[i] = false;
                         break;
                     }
                 }
             }
+            else {
+                FUV[i] = true;
+            }
         }
+        System.out.println(FUV);
         return FUV;
     }
 }
