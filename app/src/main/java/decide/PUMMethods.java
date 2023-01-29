@@ -1,5 +1,7 @@
 package decide;
 
+import static decide.CMVMethods.NUMLIC;
+
 public class PUMMethods {
     // Implement the methods for section 2.2 in this class
 
@@ -11,12 +13,12 @@ public class PUMMethods {
      * @return PUM
      */
     public static boolean[][] PUM(boolean[] CMV, Connector[][] LCM) {
-        assert (CMV.length == CMVMethods.NUMLIC && LCM.length == CMVMethods.NUMLIC && LCM[0].length == CMVMethods.NUMLIC);
+        assert (CMV.length == NUMLIC && LCM.length == NUMLIC && LCM[0].length == NUMLIC);
 
-        boolean[][] PUM = new boolean[CMVMethods.NUMLIC][CMVMethods.NUMLIC];
+        boolean[][] PUM = new boolean[NUMLIC][NUMLIC];
 
-        for (int i = 0; i < CMVMethods.NUMLIC; i++) {
-            for (int j = 0; j < CMVMethods.NUMLIC; j++) {
+        for (int i = 0; i < NUMLIC; i++) {
+            for (int j = 0; j < NUMLIC; j++) {
                 if (LCM[i][j] == Connector.NOTUSED) {
                     PUM[i][j] = true;
                 }

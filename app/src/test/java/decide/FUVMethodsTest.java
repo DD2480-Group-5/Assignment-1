@@ -30,7 +30,7 @@ public class FUVMethodsTest {
             {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true}
         };
         boolean PUV[] = {true, false, true, true, true, true, true, true, true, true, true, true, true, true, true};
-        boolean FUV[] = {false, true, true, true, true, true, true, true, true, true, true, true, true, true, true};
+        boolean FUV[] = {false, true, true, false, true, true, true, true, true, true, true, true, true, true, true};
         assertTrue(Arrays.equals(FUV, FUV(PUV, PUM)));
     }
 
