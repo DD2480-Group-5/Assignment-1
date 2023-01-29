@@ -18,7 +18,7 @@ public class CMVMethodsTest {
 
     @Test
     void testNegativeCmv0() {
-        Point2D[] points = {new Point2D.Double(0, 0), new Point2D.Double(2, 2), new Point2D.Double(-2, -2)};
+        Point2D[] points = {new Point2D.Double(-2, -2), new Point2D.Double(0, 0), new Point2D.Double(2, 2)};
         double len = 5.0;
         boolean b = CMVMethods.CMV_0(points, len);
         assertFalse(b);
