@@ -18,7 +18,8 @@ The project uses Gradle to build and test the program. The unit tests are implem
 *
 
 ### Ali Shahwali
-*
+* Implemented Decide class, CMV 2, 3, 4 along with helper functions and unit tests
+* Initialised gradle project
 
 ### Elias Thiele
 * Implemented CMV method 0 and unit tests
