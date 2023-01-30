@@ -8,6 +8,9 @@ import java.awt.geom.Point2D;
 
 public class CMVMethodsTest {
 
+    /**
+     * The computed distance between the two points should be greater than 5.
+     */
     @Test
     void testPositiveCmv0() {
         Point2D[] points = {new Point2D.Double(0, 0), new Point2D.Double(10, 10)};
@@ -16,6 +19,9 @@ public class CMVMethodsTest {
         assertTrue(b);
     }
 
+    /**
+     * The computed distance between any two consecutive points should be less than 5.
+     */
     @Test
     void testNegativeCmv0() {
         Point2D[] points = {new Point2D.Double(-2, -2), new Point2D.Double(0, 0), new Point2D.Double(2, 2)};
