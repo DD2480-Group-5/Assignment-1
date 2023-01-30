@@ -30,6 +30,9 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    /**
+     * There exists three consecutive points whose circumcircle has a radius greater than 1.
+     */
     @Test
     void testPositiveCmv1() {
         Point2D[] points = {
@@ -43,6 +46,9 @@ public class CMVMethodsTest {
         assertTrue(b);
     }
 
+    /**
+     * There're only 2 points. Not a valid input.
+     */
     @Test
     void testNegativeCmv1() {
         Point2D[] points = {new Point2D.Double(0, 0), new Point2D.Double(2, 2)};
@@ -131,7 +137,9 @@ public class CMVMethodsTest {
         assertFalse(eval);
     }
 
-
+    /**
+     * There exists two consecutive points, such that the x coordinate of the latter one is smaller than the previous one. 
+     */
     @Test
     void testPositiveCmv5() {
         Point2D[] points = {
@@ -144,6 +152,9 @@ public class CMVMethodsTest {
         assertTrue(b);
     }
 
+    /**
+     * There's only 1 point. Not a valid input.
+     */
     @Test
     void testNegativeCmv5() {
         Point2D[] points = {new Point2D.Double(0, 0)};
@@ -151,6 +162,9 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    /**
+     * There exists 4 consecutive points such that at least one point lies a distance greater than 1 from t he line joining the first and last of these 4 points.
+     */
     @Test
     void testPositiveCmv6() {
         Point2D[] points = {
@@ -166,6 +180,9 @@ public class CMVMethodsTest {
         assertTrue(b);
     }
 
+    /**
+     * N_PTS > NUMPOINTS. Not a valid input.
+     */
     @Test
     void testNegativeCmv6() {
         Point2D[] points = {
@@ -248,6 +265,9 @@ public class CMVMethodsTest {
         assertFalse(CMVMethods.CMV_8(points, a_pts, b_pts, radius2_f));
     }
 
+    /**
+     * There exists three data poitns separated by exactly 1 and 1 consecutive intervening points, respectively, such that the angle formed by which is smaller than PI - 0.1 * PI. (The second points of the three points is the vertex of the angle.)
+     */
     @Test
     void testPositiveCmv9() {
         Point2D[] points = {
@@ -264,6 +284,9 @@ public class CMVMethodsTest {
         assertTrue(b);
     }
 
+    /**
+     * C_PTS + D_PTS > NUMPOINTS - 3. Not a valid input.
+     */
     @Test
     void testNegativeCmv9() {
         Point2D[] points = {
@@ -279,6 +302,9 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    /**
+     * There exists three data points separated by exactly 1 and 1 consecutive intervening points, respectively, that area of the triangle formed by which is greater than 1.
+     */
     @Test
     void testPositiveCmv10() {
         Point2D[] points = {
@@ -295,6 +321,9 @@ public class CMVMethodsTest {
         assertTrue(b);
     }
 
+    /**
+     * AREA < 0. Not a valid input.
+     */
     @Test
     void testNegativeCmv10() {
         Point2D[] points = {
@@ -386,6 +415,9 @@ public class CMVMethodsTest {
         assertFalse(CMVMethods.CMV_12(points_2, k_pts, length1, length2));
     }
 
+    /** 
+     * There exists three points, separated by exactly 1 and 1 consecutive intervening points, respectively, that the radius of circumcircle of which has a radius larger than 1. In addition, there exists three points, separated by exactly 1 and 1 consecutive intervening points, respectively, that the radius of circumcircle of which has a radius smaller than 1.
+     */
     @Test
     void testPositiveCmv13() {
         Point2D[] points = {
@@ -404,6 +436,9 @@ public class CMVMethodsTest {
         assertTrue(b);
     }
 
+    /**
+     * A_PTS + B_PTS > NUMPOINTS - 3. Not a valid input.
+     */
     @Test
     void testNegativeCmv13() {
         Point2D[] points = {
@@ -419,7 +454,10 @@ public class CMVMethodsTest {
         boolean b = CMVMethods.CMV_13(points, a_pts, b_pts, radius1, radius2);
         assertFalse(b);
     }
-
+    
+    /**
+     * There exists three data points, separated by exactly 1 and 1 consecutive intervening points, respectively, that area of the triangle formed by which is greater than 1. In addition, there exists three data points, separated by exactly 1 and 1 consecutive intervening points, respectively, that area of the triangle formed by which is less than 2.
+     */
     @Test
     void testPositiveCmv14() {
         Point2D[] points = {
@@ -438,6 +476,9 @@ public class CMVMethodsTest {
         assertTrue(b);
     }
 
+    /**
+     * AREA1 < 0. Not a valid input. 
+     */
     @Test
     void testNegativeCmv14() {
         Point2D[] points = {

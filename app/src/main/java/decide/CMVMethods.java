@@ -40,7 +40,7 @@ public class CMVMethods {
      * @param p1 : Point 1.
      * @param p2 : Point 2.
      * @param p3 : Point 3
-     * @return Radius of the circumscribed circle of a triangle given by @param p1, @param p2 and @param p3 .
+     * @return Radius of the circumscribed circle of a triangle given by p1, p2 and p3 .
      */
     public static double circumscribedCircleRadius(Point2D p1, Point2D p2, Point2D p3) {
         double l1 = p2.distance(p3);
@@ -57,7 +57,7 @@ public class CMVMethods {
      * @param p1 : Point 1.
      * @param p2 : Point 2.
      * @param p3 : Point 3.
-     * @return Area of an triangle given by @param p1, @param p2 and @param p3 .
+     * @return Area of an triangle given by p1, p2 and p3 .
      */
     public static double triangleArea(Point2D p1, Point2D p2, Point2D p3) {
         double area = Math.abs((p1.getX() * (p2.getY() - p3.getY()) + p2.getX() * (p3.getY() - p1.getY()) + p3.getX() * (p1.getY() - p2.getY())) / 2);
@@ -70,7 +70,7 @@ public class CMVMethods {
      * @param p1 : The point.
      * @param p2 : The point used to construct a line.
      * @param p3 : Another point used to construct a line.
-     * @return
+     * @return Distance between p1 and the line given by p2 and p3.
      */
     public static double distanceFromPointToLine(Point2D p1, Point2D p2, Point2D p3) {
         double slope;

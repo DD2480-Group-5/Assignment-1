@@ -14,6 +14,9 @@ import static decide.LAUNCHMethods.*;
 
 public class DecideTest {
 
+    /**
+     * Given all the required input to the DECIDE program, the DECIDE program is functionally correct, according to outputs it produces.
+     */
     @Test
     void testPositiveDecide() {
         double  LENGTH1 = 1.0;
@@ -116,6 +119,9 @@ public class DecideTest {
         assertTrue(launch);
     }
 
+    /**
+     * A negative test of DECIDE.
+     */
     @Test
     void testNegativeDecide() {
         Point2D[] points = new Point2D[] {

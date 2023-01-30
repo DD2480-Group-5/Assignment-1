@@ -10,6 +10,9 @@ import static decide.FUVMethods.*;
 
 public class FUVMethodsTest {
     
+    /**
+     * Given PUM and PUV, FUV method can compute the correct result of FUV, based on the rule in the project description.
+     */
     @Test
     void testPositiveFUV() {
         boolean PUM[][] ={
@@ -34,6 +37,9 @@ public class FUVMethodsTest {
         assertTrue(Arrays.equals(FUV, FUV(PUV, PUM)));
     }
 
+    /** 
+     * A negative test of FUV method. 
+     */
     @Test
     void testNegativeFUV() {
         boolean PUM[][] ={
