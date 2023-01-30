@@ -10,6 +10,9 @@ import static decide.PUMMethods.*;
 
 public class PUMMethodsTest {
     
+    /**
+     * Given the CMV and LCM, PUM method can compute the correct result of PUM, based on the rule in the project description.
+     */
     @Test
     void testPositivePUM() {
         boolean[] CMV = {false, true, true, true, false, false, false, false, false, false, false, false, false, false, false};
@@ -51,6 +54,9 @@ public class PUMMethodsTest {
         assertTrue(neglectDiagonalEquals(PUM(CMV, LCM), PUM));
     }
 
+    /**
+     * A negative test of PUM method.
+     */
     @Test
     void testNegativePUM() {
         boolean[] CMV = {false, true, true, true, false, false, false, false, false, false, false, false, false, false, false};
