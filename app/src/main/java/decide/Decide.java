@@ -1,8 +1,6 @@
 package decide;
 
-import static java.lang.Math.PI;
 import java.awt.geom.Point2D;
-import java.util.Arrays;
 import java.io.*;
 
 public class Decide {
@@ -177,12 +175,7 @@ public class Decide {
         boolean[][] PUM = PUMMethods.PUM(CMV, LCM);
         boolean[] FUV = FUVMethods.FUV(PUV, PUM);
 
-        boolean launch = true;
-        for (int i = 0; i < 15; i++) {
-            if (!FUV[i]) {
-                launch = false;
-            }
-        }
+        boolean launch = LAUNCHMethods.LAUNCH(FUV);
         if (launch) {
             System.out.println("YES");
         } else {
