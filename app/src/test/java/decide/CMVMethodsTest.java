@@ -57,6 +57,9 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    /**
+     * There exists three consecutive points which form an angle such that angle < PI - 0.1.
+     */
     @Test
     void testPositiveCmv2() {
         Point2D[] points = {
@@ -71,6 +74,9 @@ public class CMVMethodsTest {
         assertTrue(eval);
     }
 
+    /**
+     * There're no three consecutive points which form an angle such that angle < PI - 0.1.
+     */
     @Test
     void testNegativeCmv2() {
         Point2D[] points = {
@@ -85,6 +91,9 @@ public class CMVMethodsTest {
         assertFalse(eval);
     }
 
+    /**
+     * There exists three consecutive points such that area of the triangle formed by which is greater than 8.
+     */
     @Test 
     void testPositiveCmv3() {
         Point2D[] points = {
@@ -97,6 +106,9 @@ public class CMVMethodsTest {
         assertTrue(eval);
     }
 
+    /**
+     * There're no three consecutive points such that area of the triangle formed by which is greater than 5.5.
+     */
     @Test 
     void testNegativeCmv3() {
         Point2D[] points = {
@@ -109,6 +121,9 @@ public class CMVMethodsTest {
         assertFalse(eval);
     }
 
+    /**
+     * There exists 3 consecutive points that lie in more than 2 quadrants.
+     */
     @Test
     void testPositiveCmv4() {
         Point2D[] points = {
@@ -123,6 +138,9 @@ public class CMVMethodsTest {
         assertTrue(eval);
     }
 
+    /**
+     * There're no 3 consecutive points that lie in more than 2 quadrants.
+     */
     @Test
     void testNegativeCmv4() {
         Point2D[] points = {
@@ -197,6 +215,9 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    /**
+     * There exists two data points separated by exactly 3 consecutive intervening points that are a distance greater than 4.8 apart.
+     */
     @Test
     void testPositiveCmv7() {
         Point2D[] points = {
@@ -212,6 +233,11 @@ public class CMVMethodsTest {
         assertTrue(CMVMethods.CMV_7(points, k_pts, length1));
     }
 
+    /**
+     * Test 1: There're no data points separated by exactly 3 consecutive intervening points that are a distance greater than 5 apart.
+     * Test 2: K_PTS > NUMPOINTS - 2. Not a valid input.
+     * Test 3: LENGTH < 0. Not a valid input.
+     */
     @Test
     void testNegativeCmv7() {
         Point2D[] points = {
@@ -231,6 +257,9 @@ public class CMVMethodsTest {
         assertFalse(CMVMethods.CMV_7(points, k_pts, length2));
     }
 
+    /**
+     * There exists three points separated by exactly 1 and 1 consecutive intervening points, respectively, that radius of the circumcircle of which is larger than 2.
+     */
     @Test
     void testPositiveCmv8() {
         Point2D[] points = {
@@ -246,6 +275,11 @@ public class CMVMethodsTest {
         assertTrue(CMVMethods.CMV_8(points, a_pts, b_pts, radius2));
     }
 
+    /**
+     * Test 1: There're no three points separated by exactly 1 and 1 consecutive intervening points, respectively, that radius of the circumcircle of which is larger than 5.
+     * Test 2: A_PTS + B_PTS > NUMPOINTS - 3. Not a valid input.
+     * Test 3: RADIUS1 < 0. Not a valid input.
+     */
     @Test
     void testNegativeCmv8() {
         Point2D[] points = {
@@ -339,6 +373,9 @@ public class CMVMethodsTest {
         assertFalse(b);
     }
 
+    /**
+     * There exists two points separated by exactly 2 consecutive intervening points, such that the x coordinate of the latter is less than the former.
+     */
     @Test
     void testPositiveCmv11() {
         Point2D[] points = {
@@ -352,6 +389,11 @@ public class CMVMethodsTest {
         assertTrue(CMVMethods.CMV_11(points, g_pts));
     }
 
+    /**
+     * Test 1: There're no two points separated by exactly 2 consecutive intervening points, such that the x coordinate of the latter is less than the former.
+     * Test 2: G_PTS > NUMPOINTS - 2. Not a valid input.
+     * Test 3: G_PTS > NUMPOINTS - 2. Not a valid input.
+     */
     @Test
     void testNegativeCmv11() {
         Point2D[] points = {
@@ -379,6 +421,9 @@ public class CMVMethodsTest {
         assertFalse(CMVMethods.CMV_11(points_3, g_pts));
     }
 
+    /**
+     * There exists two points, seaprated by exactly 1 point, which are a distance greater than the length 3 apart. In addition, there exists two points, separated by exactly 1 point, that are a distance less than the length 2 apart.
+     */
     @Test
     void testPositiveCmv12() {
         Point2D[] points = {
@@ -393,6 +438,11 @@ public class CMVMethodsTest {
         assertTrue(CMVMethods.CMV_12(points, k_pts, length1, length2));
     }
 
+    /**
+     * Test 1: There'are no two points, seaprated by exactly 1 point, which are a distance greater than the length 6 apart. In addition, there exists two points, separated by exactly 1 point, that are a distance less than the length 2 apart.
+     * Test 2: K_PTS > NUMPOINTS - 2. Not a valid input.
+     * Test 3: K_PTS > NUMPOINTS - 2. Not a valid input.
+     */
     @Test
     void testNegativeCmv12() {
         Point2D[] points = {
