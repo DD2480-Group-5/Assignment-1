@@ -21,7 +21,9 @@ The project uses Gradle to build and test the program. The unit tests are implem
 
 ### Minchong Li
 
-*
+* Wrote the spec and implemented  the interface for all CMV methods.
+* Implemented CMV method 7, 8, 11 and 12 along with their unit tests.
+* Implemented LAUNCH method and its unit tests.
 
 ### Ali Shahwali
 * Implemented Decide class, CMV 2, 3, 4 along with helper functions and unit tests
