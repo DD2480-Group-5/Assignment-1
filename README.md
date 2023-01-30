@@ -15,8 +15,7 @@ The project uses Gradle to build and test the program. The unit tests are implem
 
 ## Generating documentation
 
-1. Navigate to `DECIDE\Group-5-DD2480-Assignment-1\app\src\main\java`
-2. Execute `javadoc decide`
+1. From the base directory, execute `javadoc -d doc -sourcepath app/src/main/java decide`
 
 ## Statement of contributions
 
