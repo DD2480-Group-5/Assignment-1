@@ -109,6 +109,11 @@ public class DecideTest {
         assertTrue(Arrays.deepEquals(PUM, truePUM));
         assertTrue(Arrays.equals(FUV, trueFUV));
         assertTrue(launch);
+
+        // Test Decide class
+        Decide decide = new Decide(LENGTH1, RADIUS1, EPSILON, AREA1, Q_PTS, QUADS, DIST, N_PTS, K_PTS, A_PTS, B_PTS, C_PTS, D_PTS, E_PTS, F_PTS, G_PTS, LENGTH2, RADIUS2, AREA2, points, LCM, PUV);
+        launch = decide.evaluateLaunch();
+        assertTrue(launch);
     }
 
     @Test
@@ -155,27 +160,10 @@ public class DecideTest {
             PUV[i] = true;
         }
 
-        boolean[] CMV = new boolean[] {
-            CMV_0(points, LENGTH1),
-            CMV_1(points, RADIUS1),
-            CMV_2(points, EPSILON),
-            CMV_3(points, AREA1),
-            CMV_4(points, Q_PTS, QUADS),
-            CMV_5(points),
-            CMV_6(points, N_PTS, DIST),
-            CMV_7(points, K_PTS, LENGTH1),
-            CMV_8(points, A_PTS, B_PTS, RADIUS1),
-            CMV_9(points, C_PTS, D_PTS, EPSILON),
-            CMV_10(points, E_PTS, F_PTS, AREA1),
-            CMV_11(points, G_PTS),
-            CMV_12(points, K_PTS, LENGTH1, LENGTH2),
-            CMV_13(points, A_PTS, B_PTS, RADIUS1, RADIUS2),
-            CMV_14(points, E_PTS, F_PTS, AREA1, AREA2)
-        };
+        Decide decide = new Decide(LENGTH1, RADIUS1, EPSILON, AREA1, Q_PTS, QUADS, DIST, N_PTS, K_PTS,
+            A_PTS, B_PTS, C_PTS, D_PTS, E_PTS, F_PTS, G_PTS, LENGTH2, RADIUS2, AREA2, points, LCM, PUV);
 
-        boolean[][] PUM = PUM(CMV, LCM);
-        boolean[] FUV = FUV(PUV, PUM);
-        boolean launch = LAUNCH(FUV);
+        boolean launch = decide.evaluateLaunch();
         assertFalse(launch);
     }
 }

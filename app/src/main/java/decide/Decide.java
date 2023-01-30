@@ -152,30 +152,11 @@ public class Decide {
             System.exit(1);
         }
 
-        // Have: Points, LCM, PUV
-        // Need: CMV, PUM, FUV
-        boolean[] CMV = new boolean[] {
-            CMVMethods.CMV_0(points, LENGTH1),
-            CMVMethods.CMV_1(points, RADIUS1),
-            CMVMethods.CMV_2(points, EPSILON),
-            CMVMethods.CMV_3(points, AREA1),
-            CMVMethods.CMV_4(points, Q_PTS, QUADS),
-            CMVMethods.CMV_5(points),
-            CMVMethods.CMV_6(points, N_PTS, DIST),
-            CMVMethods.CMV_7(points, K_PTS, LENGTH1),
-            CMVMethods.CMV_8(points, A_PTS, B_PTS, RADIUS1),
-            CMVMethods.CMV_9(points, C_PTS, D_PTS, EPSILON),
-            CMVMethods.CMV_10(points, E_PTS, F_PTS, AREA1),
-            CMVMethods.CMV_11(points, G_PTS),
-            CMVMethods.CMV_12(points, K_PTS, LENGTH1, LENGTH2),
-            CMVMethods.CMV_13(points, A_PTS, B_PTS, RADIUS1, RADIUS2),
-            CMVMethods.CMV_14(points, E_PTS, F_PTS, AREA1, AREA2)
-        };
+        Decide decide = new Decide(LENGTH1, RADIUS1, EPSILON, AREA1, Q_PTS, QUADS, DIST, N_PTS, K_PTS, 
+            A_PTS, B_PTS, C_PTS, D_PTS, E_PTS, F_PTS, G_PTS, LENGTH2, RADIUS2, AREA2, points, LCM, PUV);
 
-        boolean[][] PUM = PUMMethods.PUM(CMV, LCM);
-        boolean[] FUV = FUVMethods.FUV(PUV, PUM);
+        boolean launch = decide.evaluateLaunch();
 
-        boolean launch = LAUNCHMethods.LAUNCH(FUV);
         if (launch) {
             System.out.println("YES");
         } else {
@@ -229,5 +210,36 @@ public class Decide {
         this.points = points;
         this.LCM = LCM;
         this.PUV = PUV;
+    }
+
+    /**
+     * Evaluates all CMV functions, PUM and FUV and returns whether or not to launch.
+     * @return {@code true} if there should be a launch, otherwise {@code false}.
+     */
+    public boolean evaluateLaunch() {
+        boolean[] CMV = new boolean[] {
+            CMVMethods.CMV_0(points, LENGTH1),
+            CMVMethods.CMV_1(points, RADIUS1),
+            CMVMethods.CMV_2(points, EPSILON),
+            CMVMethods.CMV_3(points, AREA1),
+            CMVMethods.CMV_4(points, Q_PTS, QUADS),
+            CMVMethods.CMV_5(points),
+            CMVMethods.CMV_6(points, N_PTS, DIST),
+            CMVMethods.CMV_7(points, K_PTS, LENGTH1),
+            CMVMethods.CMV_8(points, A_PTS, B_PTS, RADIUS1),
+            CMVMethods.CMV_9(points, C_PTS, D_PTS, EPSILON),
+            CMVMethods.CMV_10(points, E_PTS, F_PTS, AREA1),
+            CMVMethods.CMV_11(points, G_PTS),
+            CMVMethods.CMV_12(points, K_PTS, LENGTH1, LENGTH2),
+            CMVMethods.CMV_13(points, A_PTS, B_PTS, RADIUS1, RADIUS2),
+            CMVMethods.CMV_14(points, E_PTS, F_PTS, AREA1, AREA2)
+        };
+
+        boolean[][] PUM = PUMMethods.PUM(CMV, LCM);
+        boolean[] FUV = FUVMethods.FUV(PUV, PUM);
+
+        boolean launch = LAUNCHMethods.LAUNCH(FUV);
+
+        return launch;
     }
 }
