@@ -32,6 +32,7 @@ The project uses Gradle to build and test the program. The unit tests are implem
 ### Elias Thiele
 
 * Implemented CMV method 0 and unit tests.
+* Implemented the main DECIDE method.
 * Wrote documentation.
 
 ### Zihao Xu
@@ -40,6 +41,6 @@ The project uses Gradle to build and test the program. The unit tests are implem
 
 - Implemented PUM method and unit tests.
 
-- Implemented FUC method and unit tests.
+- Implemented FUV method and unit tests.
 
 ## Way of working assessment
