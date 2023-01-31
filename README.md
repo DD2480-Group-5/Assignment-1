@@ -13,6 +13,11 @@ The project uses Gradle to build and test the program. The unit tests are implem
 1. `gradle wrapper`
 2. `./gradle build`
 
+## Running the program
+
+The main DECIDE program reads a DECIDE instance from stdin. The first 19 lines of standard input represents the scalar parameters defined in the requirements specification: `LENGTH1`, `RADIUS1`, ..., `AREA2`. The next 15 lines are each 15 numbers from {0=NOTUSED, 1=ORR, 2=ANDD} that represents the LCM. The next line is 15 values from {true, false} representing the PUV. The next line is an integer N with the number of radar data points, and the next N lines are pairs of doubles representing the `x` and `y` coordinates of each point. There is an example input file under `app/input`. On Linux, you can run the main DECIDE method with an input file using the following command: 
+`java -classpath app/bin/main decide.Decide < [path-to-input-file]`
+
 ## Generating documentation
 
 1. From the base directory, execute `javadoc -d doc -sourcepath app/src/main/java decide`
