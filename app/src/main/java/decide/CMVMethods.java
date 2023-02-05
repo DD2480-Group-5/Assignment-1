@@ -144,7 +144,7 @@ public class CMVMethods {
      * is not satisfied by those three points.
      *
      * @param points  :  Array containing the coordinates of data points.
-     * @param EPSILON : The angle threshold, 0 ≤ EPSILON < PI.
+     * @param EPSILON : The angle threshold, 0 <= EPSILON < PI.
      * @return true if condition 2 is satisfied, else false.
      */
     public static boolean CMV_2(Point2D[] points, double EPSILON) {
@@ -170,7 +170,7 @@ public class CMVMethods {
      * with area greater than AREA1.
      *
      * @param points : Array containing the coordinates of data points.
-     * @param AREA1  :  The area threshold, 0 ≤ AREA1.
+     * @param AREA1  :  The area threshold, 0 <= AREA1.
      * @return true if condition 3 is satisfied, else false.
      */
     public static boolean CMV_3(Point2D[] points, double AREA1) {
@@ -200,8 +200,8 @@ public class CMVMethods {
      * (0,1) is in quadrant I and the point (1,0) is in quadrant I.
      *
      * @param points : Array containing the coordinates of data points.
-     * @param Q_PTS  :  2 ≤ Q_PTS ≤ NUMPOINTS.
-     * @param QUADS  :  1 ≤ QUADS ≤ 3.
+     * @param Q_PTS  :  2 <= Q_PTS <= NUMPOINTS.
+     * @param QUADS  :  1 <= QUADS <= 3.
      * @return true if condition 4 is satisfied, else false.
      */
     public static boolean CMV_4(Point2D[] points, int Q_PTS, int QUADS) {
@@ -272,8 +272,8 @@ public class CMVMethods {
      * the N PTS consecutive points. The condition is not met when NUMPOINTS < 3.
      *
      * @param points : Array containing the coordinates of data points.
-     * @param N_PTS  :  3 ≤ N_PTS ≤ NUMPOINTS
-     * @param DIST   :   0 ≤ DIST
+     * @param N_PTS  :  3 <= N_PTS <= NUMPOINTS
+     * @param DIST   :   0 <= DIST
      * @return true if condition 6 is satisfied, else false.
      */
     public static boolean CMV_6(Point2D[] points, int N_PTS, double DIST) {
@@ -304,7 +304,7 @@ public class CMVMethods {
      * The condition is not met when NUMPOINTS < 3.
      *
      * @param points  :  Array containing the coordinates of data points.
-     * @param K_PTS   :   1 ≤ K_PTS ≤ (NUMPOINTS−2)
+     * @param K_PTS   :   1 <= K_PTS <= (NUMPOINTS-2)
      * @param LENGTH1 : The length threshold, LENGTH1 >= 0.
      * @return true if condition 7 is satisfied, else false.
      */
@@ -334,9 +334,9 @@ public class CMVMethods {
      * radius RADIUS1. The condition is not met when NUMPOINTS < 5.
      *
      * @param points  :  Array containing the coordinates of data points.
-     * @param A_PTS   :   1 ≤ A_PTS, A_PTS+B_PTS ≤ (NUMPOINTS−3).
-     * @param B_PTS   :   1 ≤ B_PTS, A_PTS+B_PTS ≤ (NUMPOINTS−3).
-     * @param RADIUS1 : 0 ≤ RADIUS1.
+     * @param A_PTS   :   1 <= A_PTS, A_PTS+B_PTS <= (NUMPOINTS-3).
+     * @param B_PTS   :   1 <= B_PTS, A_PTS+B_PTS <= (NUMPOINTS-3).
+     * @param RADIUS1 : 0 <= RADIUS1.
      * @return true if condition 8 is satisfied, else false.
      */
     public static boolean CMV_8(Point2D[] points, int A_PTS, int B_PTS, double RADIUS1) {
@@ -372,9 +372,9 @@ public class CMVMethods {
      * is not satisfied by those three points. When NUMPOINTS < 5, the condition is not met.
      *
      * @param points  :  Array containing the coordinates of data points.
-     * @param C_PTS   :   1 ≤ C_PTS, C_PTS+D_PTS ≤ (NUMPOINTS−3).
-     * @param D_PTS   :   1 ≤ D_PTS, C_PTS+D_PTS ≤ (NUMPOINTS−3).
-     * @param EPSILON : 0 ≤ EPSILON < PI.
+     * @param C_PTS   :   1 <= C_PTS, C_PTS+D_PTS <= (NUMPOINTS-3).
+     * @param D_PTS   :   1 <= D_PTS, C_PTS+D_PTS <= (NUMPOINTS-3).
+     * @param EPSILON : 0 <= EPSILON < PI.
      * @return true if condition 9 is satisfied, else false.
      */
     public static boolean CMV_9(Point2D[] points, int C_PTS, int D_PTS, double EPSILON) {
@@ -401,9 +401,9 @@ public class CMVMethods {
      * The condition is not met when NUMPOINTS < 5.
      *
      * @param points : Array containing the coordinates of data points.
-     * @param E_PTS  :  1 ≤ E_PTS, E_PTS+F_PTS ≤ (NUMPOINTS−3).
-     * @param F_PTS  :  1 ≤ F_PTS, E_PTS+F_PTS ≤ (NUMPOINTS−3).
-     * @param AREA1  :  0 ≤ AREA1.
+     * @param E_PTS  :  1 <= E_PTS, E_PTS+F_PTS <= (NUMPOINTS-3).
+     * @param F_PTS  :  1 <= F_PTS, E_PTS+F_PTS <= (NUMPOINTS-3).
+     * @param AREA1  :  0 <= AREA1.
      * @return true if condition 10 is satisfied, else false.
      */
     public static boolean CMV_10(Point2D[] points, int E_PTS, int F_PTS, double AREA1) {
@@ -427,7 +427,7 @@ public class CMVMethods {
      * condition is not met when NUMPOINTS < 3.
      *
      * @param points : Array containing the coordinates of data points.
-     * @param G_PTS  :  1 ≤ G_PTS ≤ NUMPOINTS−2.
+     * @param G_PTS  :  1 <= G_PTS <= NUMPOINTS-2.
      * @return true if condition 11 is satisfied, else false.
      */
     public static boolean CMV_11(Point2D[] points, int G_PTS) {
@@ -458,8 +458,8 @@ public class CMVMethods {
      *
      * @param points  : Array containing the coordinates of data points.
      * @param K_PTS   :
-     * @param LENGTH1 : 0 ≤ LENGTH1.
-     * @param LENGTH2 : 0 ≤ LENGTH2.
+     * @param LENGTH1 : 0 <= LENGTH1.
+     * @param LENGTH2 : 0 <= LENGTH2.
      * @return true if condition 12 is satisfied, else false.
      */
     public static boolean CMV_12(Point2D[] points, int K_PTS, double LENGTH1, double LENGTH2) {
@@ -500,10 +500,10 @@ public class CMVMethods {
      * not met when NUMPOINTS < 5.
      *
      * @param points  : Array containing the coordinates of data points.
-     * @param A_PTS   :  1 ≤ A_PTS, A_PTS+B_PTS ≤ (NUMPOINTS−3).
-     * @param B_PTS   :  1 ≤ B_PTS, A_PTS+B_PTS ≤ (NUMPOINTS−3).
-     * @param RADIUS1 : 0 ≤ RADIUS1
-     * @param RADIUS2 : 0 ≤ RADIUS2
+     * @param A_PTS   :  1 <= A_PTS, A_PTS+B_PTS <= (NUMPOINTS-3).
+     * @param B_PTS   :  1 <= B_PTS, A_PTS+B_PTS <= (NUMPOINTS-3).
+     * @param RADIUS1 : 0 <= RADIUS1
+     * @param RADIUS2 : 0 <= RADIUS2
      * @return true if condition 13 is satisfied, else false.
      */
     public static boolean CMV_13(Point2D[] points, int A_PTS, int B_PTS, double RADIUS1, double RADIUS2) {
@@ -533,10 +533,10 @@ public class CMVMethods {
      * for the LIC to be true. The condition is not met when NUMPOINTS < 5.
      *
      * @param points : Array containing the coordinates of data points.
-     * @param E_PTS  :  1 ≤ E_PTS, E_PTS+F_PTS ≤ (NUMPOINTS−3).
-     * @param F_PTS  :  1 ≤ F_PTS, E_PTS+F_PTS ≤ (NUMPOINTS−3).
-     * @param AREA1  :  0 ≤ AREA1.
-     * @param AREA2  :  0 ≤ AREA2.
+     * @param E_PTS  :  1 <= E_PTS, E_PTS+F_PTS <= (NUMPOINTS-3).
+     * @param F_PTS  :  1 <= F_PTS, E_PTS+F_PTS <= (NUMPOINTS-3).
+     * @param AREA1  :  0 <= AREA1.
+     * @param AREA2  :  0 <= AREA2.
      * @return true if condition 14 is satisfied, else false.
      */
     public static boolean CMV_14(Point2D[] points, int E_PTS, int F_PTS, double AREA1, double AREA2) {
