@@ -55,16 +55,4 @@ Based on our assessment, we are in the `Working well` stage of the way of workin
 
 
 test - lmc
-test2 - elias
 
-test3 - lmc
-
-test4 - lmc
-
-test5 - lmc
-
-test6 - lmc
-
-test7 - lmc
-
-test8 - lmc
